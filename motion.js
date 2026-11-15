@@ -145,8 +145,8 @@ setInterval(() => {
   gx.setTransform(d, 0, 0, d, 0, 0); gx.clearRect(0, 0, w, h);
   pts.shift(); pts.push(Math.min(.9, Math.max(.45, pts[pts.length - 1] + (Math.random() - .5) * .09)));
   gx.beginPath(); pts.forEach((p, i) => { const x = i / (pts.length - 1) * w, yy = h - p * h; i ? gx.lineTo(x, yy) : gx.moveTo(x, yy); });
-  gx.strokeStyle = '#0b0b0d'; gx.lineWidth = 2; gx.lineJoin = 'round'; gx.stroke();
+  gx.strokeStyle = '#f5f5f7'; gx.lineWidth = 2; gx.lineJoin = 'round'; gx.stroke();
   gx.lineTo(w, h); gx.lineTo(0, h); gx.closePath();
-  const g = gx.createLinearGradient(0, 0, 0, h); g.addColorStop(0, 'rgba(11,11,13,.14)'); g.addColorStop(1, 'rgba(11,11,13,0)'); gx.fillStyle = g; gx.fill();
+  const g = gx.createLinearGradient(0, 0, 0, h); g.addColorStop(0, 'rgba(245,245,247,.22)'); g.addColorStop(1, 'rgba(245,245,247,0)'); gx.fillStyle = g; gx.fill();
 }, 90);
 })();

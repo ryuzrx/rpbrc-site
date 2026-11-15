@@ -65,7 +65,7 @@ function runBoot(){
   $('ring-progress').style.strokeDashoffset=703.72*(1-t/1.9);
   const logoFade=smooth((t-1.4)/.28),logoScale=.94+.06*smooth((t-1.4)/.35);
   $('boot-mark').style.opacity=logoFade;$('boot-mark').style.transform=`scale(${logoScale})`;
-  $('boot-mark').style.filter=`drop-shadow(0 0 ${22*smooth((t-1.45)/.3)}px rgba(0,0,0,.18))`;
+  $('boot-mark').style.filter=`drop-shadow(0 0 ${22*smooth((t-1.45)/.3)}px rgba(255,255,255,.3))`;
   const name=smooth((t-.3)/.6),tracking=14-13*smooth((t-.35)/.8);
   document.querySelector('.boot-title').style.cssText=`opacity:${name};letter-spacing:${tracking}px;filter:blur(${6*(1-name)}px)`;
   steps.forEach((step,i)=>{const a=smooth((t-[.35,.7,1,1.3][i])/.2);step.style.opacity=a;step.style.transform=`translateX(${-6*(1-a)}px)`;});
@@ -81,7 +81,7 @@ function runBoot(){
    const x1=x*cy+z*sy,z1=-x*sy+z*cy,y2=y*cp-z1*sp,z2=y*sp+z1*cp;
    const perspective=1.6/(1.6+z2);if(perspective<=0||perspective>5)continue;
    const dot=(edge?1.25:.95)*perspective,brightness=Math.min(1,Math.max(.25,.75-z2*3))*(edge?1:.7);
-   bootContext.fillStyle=`rgba(12,12,16,${brightness*fade})`;bootContext.beginPath();bootContext.arc(140+x1*scale*perspective,140+y2*scale*perspective,dot,0,Math.PI*2);bootContext.fill();
+   bootContext.fillStyle=`rgba(245,240,250,${brightness*fade})`;bootContext.beginPath();bootContext.arc(140+x1*scale*perspective,140+y2*scale*perspective,dot,0,Math.PI*2);bootContext.fill();
   }
   if(t>=1.9)finishBoot();else bootFrame=requestAnimationFrame(frame);
  }

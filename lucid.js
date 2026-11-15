@@ -65,9 +65,9 @@ setInterval(() => {
   gx.setTransform(d, 0, 0, d, 0, 0); gx.clearRect(0, 0, w, h);
   pts.shift(); pts.push(Math.min(.92, Math.max(.5, pts[pts.length - 1] + (Math.random() - .5) * .1)));
   gx.beginPath(); pts.forEach((p, i) => { const x = i / (pts.length - 1) * w, y = h - p * h; i ? gx.lineTo(x, y) : gx.moveTo(x, y); });
-  gx.strokeStyle = '#0a0a0c'; gx.lineWidth = 2; gx.shadowColor = 'rgba(0,0,0,.25)'; gx.shadowBlur = 10; gx.stroke(); gx.shadowBlur = 0;
+  gx.strokeStyle = getComputedStyle(gc).getPropertyValue('--ink').trim() || '#0a0a0c'; gx.lineWidth = 2; gx.shadowColor = 'rgba(0,0,0,.25)'; gx.shadowBlur = 10; gx.stroke(); gx.shadowBlur = 0;
   gx.lineTo(w, h); gx.lineTo(0, h); gx.closePath();
-  const f = gx.createLinearGradient(0, 0, 0, h); f.addColorStop(0, 'rgba(10,10,12,.12)'); f.addColorStop(1, 'rgba(10,10,12,0)'); gx.fillStyle = f; gx.fill();
+  const f = gx.createLinearGradient(0, 0, 0, h); f.addColorStop(0, 'rgba(142,142,150,.28)'); f.addColorStop(1, 'rgba(142,142,150,0)'); gx.fillStyle = f; gx.fill();
 }, 90);
 
 /* performance chart (illustrative) */

@@ -1,0 +1,131 @@
+/* rpbrc — silver heaven. The app's own palette: black, graphite, silver, soft white.
+   Loaded last. Graphite sky hero, soft grey page (no white glare), graphite sections. */
+:root{
+  --bg:#ebebee;--paper:#f7f7f8;--surface:#f7f7f8;--raised:#e4e4e8;
+  --white:#0b0b0d;--ink:#0b0b0d;--bright:#35353b;--silver:#6b6b73;
+  --edge:#0b0b0d10;--edge-strong:#0b0b0d1f;
+  --shadow-sm:0 1px 2px #0b0b0d0d,0 4px 14px -6px #0b0b0d1f;
+  --shadow-md:0 2px 4px #0b0b0d0a,0 18px 44px -18px #0b0b0d33;
+  --shadow-lg:0 4px 10px #0b0b0d0d,0 40px 90px -30px #0b0b0d4d;
+  --glow:linear-gradient(90deg,#8e8e96,#f5f5f7,#8e8e96);
+}
+html,html body{background:var(--bg)}
+::selection{background:#0b0b0d;color:#fff}
+.scene-backdrop,.motion-off .scene-backdrop{background:var(--bg)}
+.scene-vignette{display:none}
+
+/* ---------- intro: graphite ---------- */
+.boot{background:radial-gradient(ellipse at 50% 55%,#26262c 0%,#0b0b0d 62%)}
+.boot:before{background:radial-gradient(ellipse at center,#ffffff0d,transparent 50%)}
+.ring-track{stroke:#ffffff17}
+#ring-progress{stroke:#fff;filter:drop-shadow(0 0 5px #ffffff66)}
+.boot-title{color:#fff}
+.boot-checklist,.boot-bottom{color:#a7a7ad}
+.boot-checklist span:before{color:#fff}
+.boot-skip{background:#ffffff0d;border-color:#ffffff24;color:#c7c7cc;box-shadow:none}
+.boot-skip span{color:#8e8e96;border-color:#ffffff24}
+
+/* ---------- nav: graphite glass pill ---------- */
+.navigation{background:#121215cc;border-color:#ffffff1c;box-shadow:0 18px 40px -18px #0b0b0d99}
+.navigation .brand,.navigation .brand span{color:#fff}
+.navigation nav{color:#c7c7cc}
+.navigation nav a:hover,.navigation nav a[aria-current=true]{color:#fff}
+.navigation .lx-hl{background:#ffffff14}
+.nav-download{background:#f5f5f7;color:#0b0b0d;border-color:#f5f5f7;box-shadow:none}
+.nav-download:before{background:#fff}
+.nav-download:hover{color:#0b0b0d}
+.lx-progress{background:linear-gradient(90deg,#0b0b0d,#8e8e96);height:2px}
+
+/* ---------- hero: graphite sky to a silver horizon ---------- */
+.hero.hv{background:
+  radial-gradient(55% 38% at 50% 86%,#ffffffcc 0%,#e6e6ea66 40%,transparent 72%),
+  linear-gradient(180deg,#09090b 0%,#121215 16%,#1d1d22 30%,#2c2c33 43%,#45454d 55%,#6c6c75 66%,#9d9da5 76%,#c9c9ce 86%,#e2e2e6 93%,var(--bg) 100%)}
+.hv-sun{top:90%;width:min(1300px,150vw);background:radial-gradient(closest-side,#ffffff 0%,#ffffffd9 10%,#f2f2f566 30%,#ffffff1a 50%,transparent 70%)}
+.hv-rays{top:90%;opacity:.16;mix-blend-mode:screen;background:repeating-conic-gradient(from 0deg,#ffffff 0deg 1.6deg,transparent 1.6deg 10deg)}
+.hv-orbits{stroke:#ffffff;stroke-opacity:.08}
+.hv-prism{mix-blend-mode:screen;opacity:.3;background:linear-gradient(90deg,transparent,#ffffff,#c7c7cc,transparent)}
+.hv-bank:after{background:linear-gradient(180deg,transparent,var(--bg) 80%)}
+.hv-sky:before{content:'';position:absolute;inset:0 0 55% 0;opacity:.75;
+  background-image:radial-gradient(1px 1px at 12% 18%,#fff,transparent),radial-gradient(1px 1px at 27% 8%,#fffc,transparent),radial-gradient(1.5px 1.5px at 41% 22%,#fff,transparent),
+  radial-gradient(1px 1px at 58% 12%,#fffb,transparent),radial-gradient(1px 1px at 69% 26%,#fff,transparent),radial-gradient(1.5px 1.5px at 83% 10%,#fff,transparent),
+  radial-gradient(1px 1px at 92% 30%,#fffa,transparent),radial-gradient(1px 1px at 6% 36%,#fff9,transparent),radial-gradient(1px 1px at 35% 38%,#fff8,transparent),radial-gradient(1px 1px at 77% 40%,#fff8,transparent);
+  -webkit-mask:linear-gradient(#000,transparent);mask:linear-gradient(#000,transparent)}
+
+.hv-text{background:linear-gradient(180deg,#ffffff 0%,#ffffff 42%,#c7c7cc 58%,#f5f5f7 80%,#ffffff 100%);-webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 .04em .1em #00000080)}
+.hv-icon .hero-logo{filter:drop-shadow(0 .08em .16em #000000a6) drop-shadow(0 0 .18em #ffffff1f)}
+.hv-halo{background:conic-gradient(from var(--hv-a,0deg),#ffffff00,#ffffff66,#a7a7ad55,#ffffff66,#ffffff00 60%);opacity:.7}
+.hv-tag{color:#fff;text-shadow:0 2px 30px #00000080}
+.hv-sub{color:#c7c7cc;text-shadow:0 1px 16px #00000099}
+.hv-solid{background:#f5f5f7;color:#0b0b0d;box-shadow:0 1px 0 #fff inset,0 20px 44px -16px #000000cc,0 0 0 6px #ffffff14}
+.hv-solid:hover{background:#fff;box-shadow:0 1px 0 #fff inset,0 26px 54px -16px #000,0 0 0 9px #ffffff24}
+.hv-solid:after{background:linear-gradient(110deg,transparent 30%,#0b0b0d14 50%,transparent 70%)}
+.hv-glass{color:#fff;background:#ffffff12;border-color:#ffffff40;box-shadow:0 18px 40px -18px #000000aa;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.hv-glass:hover{background:#ffffff24}
+.hv-meta{color:#c7c7cc;text-shadow:0 1px 10px #00000099}
+.hv-meta i{background:#ffffff66}
+.hv-link{background:#ffffff0f;border-color:#ffffff33;color:#f5f5f7;box-shadow:none}
+.hv-link:hover{background:#f5f5f7;color:#0b0b0d}
+
+/* ---------- graphite sections ---------- */
+.lx-dark{--bg:#0d0d10;--paper:#151518;--surface:#151518;--raised:#1f1f24;--silver:#8e8e96;--bright:#c7c7cc;--edge:#ffffff12;--edge-strong:#ffffff22}
+.lx-band:before{background:radial-gradient(60% 50% at 50% 0%,#2a2a3166 0%,transparent 70%),#0d0d10;border-radius:44px}
+.lx-marquee.lx-dark{background:#0d0d10}
+.lx-marquee.lx-dark .lx-track span:after{background:#a7a7ad}
+.lx-prod.paid.lx-dark{background:radial-gradient(90% 60% at 50% 0%,#26262c,transparent 70%),#0d0d10}
+.contact-section{background:radial-gradient(60% 70% at 50% 0%,#2c2c33 0%,#0d0d10 65%)}
+footer.lx-foot:before{background:#0d0d10}
+.lx-giant{background:linear-gradient(180deg,#2a2a30,#0d0d10 85%)!important;-webkit-background-clip:text!important;background-clip:text!important}
+.lx-compare thead th{background:#0d0d10}
+
+/* ---------- soft grey surfaces ---------- */
+.lx-card,.detail-card,.edition-card,.feature-explorer,.lx-proof,.lx-compare,.comparison{background:var(--paper)}
+.lx-proof>div{background:var(--paper)}
+.feature-tabs{background:var(--raised)}
+.feature-tabs button[aria-selected=true]{background:#0b0b0d;color:#fff;box-shadow:0 10px 24px -10px #0b0b0d99}
+.detail-card:hover svg{background:#0b0b0d}
+.lx-badge.free{background:#0b0b0d;border-color:#0b0b0d}
+.primary{background:#0b0b0d;border-color:#0b0b0d}
+.primary:hover{background:#000;border-color:#000}
+.lx-big .w{color:#c4c4ca}
+.lx-big .w.em.on{color:#8e8e96}
+.eyebrow .availability-dot,.kicker:before{background:#0b0b0d}
+.lx-chrome{background:linear-gradient(180deg,#0b0b0d 0%,#2a2a30 40%,#8e8e96 56%,#1a1a1f 74%,#0b0b0d 100%);-webkit-background-clip:text;background-clip:text;color:transparent;animation:none}
+.lx-dark .lx-chrome{background:linear-gradient(180deg,#fff 0%,#e4e4e8 40%,#8e8e96 56%,#f5f5f7 74%,#fff 100%);-webkit-background-clip:text;background-clip:text}
+
+/* ---------- app window: dark graphite, silver accents (matches the app) ---------- */
+.lx-appframe.lx-dark{background:#141417;border-color:#ffffff1c;box-shadow:0 2px 6px #00000033,22px -16px 0 -8px #1c1c20,22px -16px 0 -7px #ffffff12,0 70px 130px -40px #000000b3!important}
+.lx-appframe.lx-dark:after{background:linear-gradient(115deg,transparent 30%,#ffffff1a 48%,transparent 62%)}
+.lx-appframe.lx-dark .ax-title,.lx-appframe.lx-dark .ax-side{background:#111114}
+.lx-appframe.lx-dark .ax-main{background:#0d0d10}
+.lx-appframe.lx-dark .ax-tile,.lx-appframe.lx-dark .ax-status{background:#161619}
+.lx-appframe.lx-dark .ax-search kbd{background:#1f1f24}
+.lx-appframe.lx-dark .ax-side button.on{background:#1f1f24}
+.lx-appframe.lx-dark .ax-launch{background:#f5f5f7;color:#0b0b0d}
+.lx-appframe.lx-dark .ax-launch svg{fill:#0b0b0d}
+.lx-appframe.lx-dark .ax-plan{background:linear-gradient(135deg,#f5f5f7,#a7a7ad);color:#0b0b0d}
+.lx-appframe.lx-dark .ax-plan span,.lx-appframe.lx-dark .ax-plan a{color:#0b0b0d}
+.lx-appframe.lx-dark .ax-ring .val{stroke:#f5f5f7}
+.lx-appframe.lx-dark .ax-bars i{background:linear-gradient(180deg,#f5f5f7,#6b6b73)}
+.lx-appframe.lx-dark .ax-tl i{background:#26262b}.lx-appframe.lx-dark .ax-tl i.h{background:#f5f5f7}
+.lx-appframe.lx-dark .ax-pre.on{background:#1f1f24;border-color:#c7c7cc}.lx-appframe.lx-dark .ax-pre.on i{border-color:#f5f5f7}
+.lx-appframe.lx-dark .ax-xhbox{background:#1f1f24}
+.lx-appframe.lx-dark #ax-graph{background:repeating-linear-gradient(0deg,transparent 0 23px,#ffffff0d 23px 24px),#1f1f24}
+.lx-appframe.lx-dark .ax-chip{background:#1f1f24}
+.lx-appframe.lx-dark .ax-chip.dark{background:#f5f5f7;color:#0b0b0d}
+.lx-appframe.lx-dark .ax-row3 div{background:#1f1f24}
+.lx-appframe.lx-dark .ax-clip{background:linear-gradient(135deg,#2c2c33,#0d0d10)}
+.lx-appframe.lx-dark .ax-dots i{background:#3a3a40}
+
+/* clouds */
+.cl-sky .cl-img{opacity:.55}
+.lx-dark .cl-img,.cl-host.cl-dark .cl-img{opacity:.14!important}
+
+.lx-cursor{border-color:#0b0b0d8c!important}
+.lx-cursor-dot{background:#0b0b0d!important}
+.lx-cursor.hover{background:#0b0b0d0f!important;border-color:#0b0b0d!important}
+html,body{overflow-x:clip}
+.hv-glass{background:#0b0b0d59;border-color:#ffffff38}
+.hv-glass:hover{background:#0b0b0d80}
+.hv-meta{padding:7px 8px 7px 16px;border-radius:999px;background:#0b0b0d66;border:1px solid #ffffff1a;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);text-shadow:none;color:#e4e4e8}
+.hv-link{background:#ffffff14}

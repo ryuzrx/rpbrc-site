@@ -7,6 +7,7 @@ const calm = () => root.classList.contains('motion-off');
 const rnd = (a, b) => a + Math.random() * (b - a);
 const pick = a => a[Math.floor(Math.random() * a.length)];
 const SRC = ['assets/clouds/cloud-1.png', 'assets/clouds/cloud-2.png', 'assets/clouds/cloud-3.png', 'assets/clouds/cloud-4.png'];
+const DUSK = ['assets/clouds/silver-1.png', 'assets/clouds/silver-2.png', 'assets/clouds/silver-3.png', 'assets/clouds/silver-4.png'];
 const small = innerWidth < 760;
 
 /* entrance after the launch animation */
@@ -30,13 +31,13 @@ function drift(el, dur, fromPx, toCss){
 /* hero sky */
 function layer(sel, count, wMin, wMax, topMin, topMax, dMin, dMax, op){
   const L = hero.querySelector(sel); if (!L) return;
-  for (let i = 0; i < count; i++) { const w = rnd(wMin, wMax), c = cloudImg(w); c.classList.add('cl-drift');
+  for (let i = 0; i < count; i++) { const w = rnd(wMin, wMax), c = cloudImg(w, pick(DUSK)); c.classList.add('cl-drift');
     c.style.top = `${rnd(topMin, topMax)}%`; c.style.opacity = op; drift(c, rnd(dMin, dMax), -w, 'calc(100vw + 20px)'); L.appendChild(c); }
 }
 layer('.hv-far', small ? 3 : 5, 220, 380, 0, 22, 160, 240, .7);
 layer('.hv-mid', small ? 2 : 4, 380, 640, 46, 66, 110, 170, .95);
 const bank = hero.querySelector('.hv-bank');
-if (bank) for (let i = 0; i < 2; i++) { const b = cloudImg(0, 'assets/clouds/cloud-bank.png'); b.loading = 'eager'; b.className = 'cl-bank'; b.style.left = `${i * 50 - 6}%`; if (i) b.style.setProperty('--flip', '-1'); bank.appendChild(b); }
+if (bank) for (let i = 0; i < 2; i++) { const b = cloudImg(0, 'assets/clouds/silver-bank.png'); b.loading = 'eager'; b.className = 'cl-bank'; b.style.left = `${i * 50 - 6}%`; if (i) b.style.setProperty('--flip', '-1'); bank.appendChild(b); }
 
 /* light motes: one sprite drawn once, then blitted */
 const cv = document.getElementById('hv-motes'), cx = cv && cv.getContext('2d', {alpha: true});
@@ -81,7 +82,8 @@ const pio = new IntersectionObserver(es => es.forEach(e => e.target.classList.to
 panels.forEach(p => {
   const box = document.createElement('div'); box.className = 'cl-sky'; box.setAttribute('aria-hidden', 'true');
   const pw = p.clientWidth || 600, big = pw > 700, n = big ? 3 : 2;
-  for (let i = 0; i < n; i++) { const w = rnd(big ? 260 : 170, big ? 420 : 260), c = cloudImg(w); c.classList.add('cl-drift');
+  const darkP = !!p.closest('.lx-dark, .contact-section');
+  for (let i = 0; i < n; i++) { const w = rnd(big ? 260 : 170, big ? 420 : 260), c = cloudImg(w, darkP ? pick(DUSK) : pick(SRC)); c.classList.add('cl-drift');
     c.style.bottom = `${-rnd(.05, .2) * w}px`; drift(c, rnd(70, 120), -w, `${pw + 20}px`); box.appendChild(c); }
   p.prepend(box); p.classList.add('cl-host'); if (p.matches('.contact-section')) p.classList.add('cl-dark');
   pio.observe(p);
