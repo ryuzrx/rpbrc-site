@@ -1,0 +1,86 @@
+/* rpbrc — black & white balance. `.lx-dark` flips the colour tokens for a section,
+   so everything inside (text, cards, controls) inverts together. */
+.lx-dark{
+  --white:#f5f5f7;--ink:#f5f5f7;--bright:#c7c7cc;--silver:#8e8e96;
+  --paper:#141417;--surface:#141417;--raised:#1d1d21;--bg:#0b0b0d;
+  --edge:#ffffff14;--edge-strong:#ffffff26;
+  --shadow-sm:0 1px 2px #0006,0 4px 14px -6px #0008;
+  --shadow-md:0 2px 4px #0005,0 18px 44px -18px #000c;
+  --shadow-lg:0 4px 10px #0006,0 40px 90px -30px #000;
+  color:var(--ink);color-scheme:dark;
+}
+/* full-bleed black band behind a section, rounded like a sheet */
+.lx-band{position:relative;isolation:isolate;padding-block:110px!important}
+.lx-band:before{content:'';position:absolute;z-index:-1;top:0;bottom:0;left:50%;width:min(100vw - 24px,1680px);transform:translateX(-50%);
+  background:radial-gradient(70% 60% at 50% 0%,#1f1f24 0%,transparent 70%),#0b0b0d;border-radius:44px;box-shadow:0 40px 100px -40px #0b0b0d66}
+.lx-band+.lx-band{margin-top:0}
+.lx-dark p{color:var(--silver)}
+.lx-dark h2,.lx-dark h3,.lx-dark h4,.lx-dark h5{color:var(--ink)}
+
+/* controls that hard-code black/white */
+.lx-dark .primary,.lx-dark .hv-solid{background:#f5f5f7;color:#0b0b0d;border-color:#f5f5f7}
+.lx-dark .primary:hover{background:#fff;border-color:#fff}
+.lx-dark .secondary:before,.lx-dark .ghost:before{background:#f5f5f7}
+.lx-dark .secondary:hover,.lx-dark .ghost:hover{color:#0b0b0d}
+.lx-dark .lx-sw:after{background:#5c5c63;box-shadow:none}
+.lx-dark .lx-sw.on{background:#f5f5f7}.lx-dark .lx-sw.on:after{background:#0b0b0d}
+.lx-dark .lx-sw:not(.on){background:#2a2a30}
+.lx-dark .lx-range{background:linear-gradient(90deg,#f5f5f7 var(--p,60%),#2a2a30 var(--p,60%))}
+.lx-dark .lx-range::-webkit-slider-thumb{background:#fff;box-shadow:0 0 0 6px #ffffff1f,0 4px 12px #000}
+.lx-dark .lx-tl i{background:#2a2a30}.lx-dark .lx-tl i.h{background:#f5f5f7}
+.lx-dark .lx-graph{background:repeating-linear-gradient(0deg,transparent 0 29px,#ffffff10 29px 30px),#1d1d21}
+.lx-dark .lx-clip{background:linear-gradient(135deg,#2a2a30,#121215)}
+.lx-dark .lx-tags span:hover{background:#f5f5f7;color:#0b0b0d}
+.lx-dark .lx-side button.on{background:#26262b}
+.lx-dark .lx-win{background:#141417;box-shadow:0 60px 120px -30px #000,0 0 0 1px #ffffff14,inset 0 1px #ffffff12}
+.lx-dark .lx-seg .lx-pill{background:#f5f5f7}
+.lx-dark .lx-seg button.on{color:#0b0b0d}
+.lx-dark .lx-track2{background:#1d1d21}
+.lx-dark .lx-fill.base{background:repeating-linear-gradient(-45deg,#2a2a30 0 6px,#222227 6px 12px)}
+.lx-dark .lx-fill.hi{background:linear-gradient(90deg,#55555c,#f5f5f7);box-shadow:0 0 30px #ffffff26}
+.lx-dark .lx-fill.hi:after{background:linear-gradient(90deg,transparent,#ffffffb0,transparent)}
+.lx-dark .lx-note{color:#6a6a72}
+.lx-dark .lx-cap:hover{background:#18181c}
+.lx-dark .lx-hl{background:#ffffff14}
+.lx-dark .cl-img{opacity:.09!important}
+
+/* ticker band */
+.lx-marquee.lx-dark{background:#0b0b0d;border:0;margin:0 12px;border-radius:999px;padding:22px 0}
+.lx-marquee.lx-dark .lx-track span{color:#4a4a52}
+.lx-marquee.lx-dark .lx-track span:hover{color:#fff}
+.lx-marquee.lx-dark .lx-track span:after{background:#f5f5f7}
+
+/* products: free cards stay white, paid cards go black */
+.lx-prod.paid.lx-dark{background:linear-gradient(160deg,#1a1a1e,#0b0b0d 70%);border-color:transparent}
+.lx-prod.paid.lx-dark .lx-ring{background:conic-gradient(from var(--lx-a),transparent 0 62%,#f5f5f7 80%,transparent 100%),linear-gradient(#ffffff1f,#ffffff1f)}
+.lx-prod.paid.lx-dark .lx-vis{background:radial-gradient(80% 90% at 50% 100%,#ffffff12,transparent 70%),#141417}
+.lx-prod.paid.lx-dark .lx-vis:after{background:linear-gradient(90deg,#ffffff08 1px,transparent 1px) 0 0/32px 32px,linear-gradient(0deg,#ffffff08 1px,transparent 1px) 0 0/32px 32px}
+.lx-prod.paid.lx-dark h3 em{color:#5c5c63}
+.lx-prod.paid.lx-dark .lx-badge{background:#ffffff14;color:#fff;border-color:#ffffff26}
+.lx-prod.paid.lx-dark li:before{background:#f5f5f7}
+.lx-prod.paid.lx-dark .lx-orbit .r{border-color:#ffffff30}.lx-prod.paid.lx-dark .lx-orbit .r2{border-color:#ffffff1c}.lx-prod.paid.lx-dark .lx-orbit .r3{border-color:#ffffff14}
+.lx-prod.paid.lx-dark .lx-orbit .r:before{background:#fff;box-shadow:0 0 14px 3px #ffffff90}
+.lx-prod.paid.lx-dark .lx-orbit .tag{background:#1d1d21e6;color:#f5f5f7;border-color:#ffffff26}
+.lx-prod.paid.lx-dark .lx-orbit img{filter:drop-shadow(0 0 40px #ffffff30)}
+.lx-prod.paid.lx-dark .primary{background:#f5f5f7;color:#0b0b0d}
+
+/* comparison: dark header row for contrast */
+.lx-compare thead th{background:#0b0b0d;color:#f5f5f7}
+.lx-compare thead th small{color:#8e8e96}
+
+/* footer band */
+footer.lx-foot{position:relative;isolation:isolate;margin-top:40px;padding:34px 0 40px!important;border-top:0}
+footer.lx-foot:before{content:'';position:absolute;z-index:-1;top:0;bottom:-400px;left:50%;width:100vw;transform:translateX(-50%);background:#0b0b0d;border-radius:44px 44px 0 0}
+footer.lx-foot,footer.lx-foot span{color:#8e8e96}
+footer.lx-foot .brand{color:#f5f5f7}
+footer.lx-foot .text-button{color:#8e8e96}
+.lx-giant{position:relative;z-index:1;background:linear-gradient(180deg,#26262b,#0b0b0d 85%)!important;-webkit-background-clip:text!important;background-clip:text!important;margin:0!important;padding-bottom:20px}
+body:has(footer.lx-foot) .lx-giant{background-color:#0b0b0d}
+html:has(footer.lx-foot){background:#0b0b0d}
+.lx-giant-wrap{background:#0b0b0d}
+
+@media(max-width:760px){
+  .lx-band{padding-block:70px!important}
+  .lx-band:before{width:calc(100vw - 12px);border-radius:28px}
+  .lx-marquee.lx-dark{margin:0 6px}
+}
