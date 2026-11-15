@@ -159,3 +159,47 @@
 main>section,main>div:not(.cl-band){position:relative;z-index:1}
 .cl-band{z-index:0}
 .cl-band .cl-cloud{opacity:.55!important}
+
+/* ===================== quality + performance pass ===================== */
+/* image clouds: transform-only animation, no filters */
+.cl-img{position:absolute;height:auto;max-width:none;user-select:none;pointer-events:none;transform:translate3d(var(--a,0),0,0) scaleX(var(--flip,1));backface-visibility:hidden}
+.cl-drift{animation:cl-move linear infinite;will-change:transform}
+@keyframes cl-move{from{transform:translate3d(var(--a),0,0) scaleX(var(--flip,1))}to{transform:translate3d(var(--b),0,0) scaleX(var(--flip,1))}}
+.hv-cloud,.cl-cloud,.hv-far .hv-cloud{filter:none!important}
+.hv-layer{will-change:transform}
+.hv-bank{left:0;right:0;bottom:-4%;height:46%;will-change:transform}
+.hv-bank .cl-bank{position:absolute;bottom:0;width:62%;min-width:900px;height:auto;transform:scaleX(var(--flip,1))}
+.hv-bank:after{z-index:2;height:38%}
+.hero.cl-paused .cl-drift,.cl-host:not(.cl-run) .cl-drift{animation-play-state:paused}
+
+/* panel skies */
+.cl-host{position:relative;overflow:hidden;isolation:isolate}
+.cl-host>*:not(.cl-sky){position:relative;z-index:1}
+.cl-sky{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;border-radius:inherit;contain:strict}
+.cl-sky .cl-img{opacity:.55}
+.cl-host.cl-dark .cl-img{opacity:.1}
+.cl-band{display:none}
+
+/* static, cheap sky effects */
+.hv-rays{animation:none;opacity:.45}
+.hv-orbits ellipse{animation:none}
+.hv-sun{animation:none;will-change:auto}
+.hv-prism{filter:none;mix-blend-mode:normal;opacity:.35;will-change:transform,opacity;height:2px}
+.hv-halo{--hv-a:0deg;animation:hv-turn 9s linear infinite;will-change:transform;filter:blur(12px)}
+@keyframes hv-turn{to{transform:rotate(360deg)}}
+.hv-icon:after{will-change:background-position}
+
+/* app window: shadow no longer changes while scrolling */
+.lx-appframe{box-shadow:0 2px 6px #0b0b0d14,22px -16px 0 -8px #ffffff,22px -16px 0 -7px #0b0b0d12,0 60px 120px -40px #0b0b0d4d!important}
+.lx-appframe:after{will-change:transform}
+.lx-appglow{display:none}
+
+/* removed heavy global layers */
+.lx-blobs{display:none!important}
+.scene-backdrop canvas{display:none}
+
+.motion-off .cl-drift,.motion-off .hv-halo{animation:none}
+@media(prefers-reduced-motion:reduce){html:not(.motion-enabled) .cl-drift{animation:none}}
+.lx-cursor{mix-blend-mode:normal!important;border-color:#0b0b0d8c!important;will-change:transform;transition:width .3s var(--spring),height .3s var(--spring),background .25s,opacity .3s}
+.lx-cursor-dot{mix-blend-mode:normal!important;background:#0b0b0d!important;will-change:transform}
+.lx-cursor.hover{background:#0b0b0d0f!important;border-color:#0b0b0d!important}

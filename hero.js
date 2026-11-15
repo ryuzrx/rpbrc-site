@@ -1,121 +1,89 @@
 'use strict';
-// rpbrc — heaven hero: clouds, light motes, parallax, and the entrance after the launch animation.
+// rpbrc — white heaven. Pre-rendered cloud images moved only with GPU transforms; everything pauses off-screen.
 (() => {
 const hero = document.querySelector('.hero.hv'); if (!hero) return;
-const calm = () => document.documentElement.classList.contains('motion-off');
+const root = document.documentElement;
+const calm = () => root.classList.contains('motion-off');
 const rnd = (a, b) => a + Math.random() * (b - a);
+const pick = a => a[Math.floor(Math.random() * a.length)];
+const SRC = ['assets/clouds/cloud-1.png', 'assets/clouds/cloud-2.png', 'assets/clouds/cloud-3.png', 'assets/clouds/cloud-4.png'];
+const small = innerWidth < 760;
 
-/* entrance: wait for the boot screen to leave */
+/* entrance after the launch animation */
 const boot = document.getElementById('boot');
 const ready = () => hero.classList.add('hv-ready');
 if (!boot || boot.hidden) setTimeout(ready, 60);
 else { new MutationObserver((m, o) => { if (boot.hidden || boot.classList.contains('exiting')) { ready(); o.disconnect(); } }).observe(boot, {attributes: true}); setTimeout(ready, 5200); }
 
-/* clouds */
-function cloud(w){
-  const c = document.createElement('div'); c.className = 'hv-cloud';
-  const h = w * .42, n = 6 + Math.round(Math.random() * 3);
-  c.style.width = `${w}px`; c.style.height = `${h}px`;
-  for (let i = 0; i < n; i++) {
-    const p = document.createElement('i'), s = rnd(.38, .7) * w * (i === Math.floor(n / 2) ? 1.15 : 1);
-    p.style.width = p.style.height = `${s}px`;
-    p.style.left = `${(i / (n - 1)) * (w - s * .7) - s * .15}px`;
-    p.style.bottom = `${rnd(-.1, .25) * h - (Math.abs(i - n / 2) < 1.5 ? -h * .12 : 0)}px`;
-    c.appendChild(p);
-  }
-  return c;
+/* one drifting cloud image */
+function cloudImg(width, src){
+  const img = new Image(); img.src = src || pick(SRC); img.alt = ''; img.decoding = 'async'; img.loading = 'lazy';
+  img.className = 'cl-img'; img.style.width = `${width}px`; img.draggable = false;
+  if (Math.random() < .5) img.style.setProperty('--flip', '-1');
+  return img;
 }
-function layer(sel, count, wMin, wMax, topMin, topMax, durMin, durMax){
-  const L = hero.querySelector(sel); if (!L) return;
-  for (let i = 0; i < count; i++) {
-    const w = rnd(wMin, wMax), c = cloud(w), dur = rnd(durMin, durMax);
-    c.style.top = `${rnd(topMin, topMax)}%`;
-    c.style.setProperty('--from', `${-w - 40}px`); c.style.setProperty('--to', `calc(100vw + 40px)`);
-    c.style.animationDuration = `${dur}s`; c.style.animationDelay = `${-rnd(0, dur)}s`;
-    L.appendChild(c);
-  }
+function drift(el, dur, fromPx, toCss){
+  el.style.setProperty('--a', `${fromPx}px`); el.style.setProperty('--b', toCss);
+  el.style.animationDuration = `${dur}s`; el.style.animationDelay = `${-rnd(0, dur)}s`;
 }
-const small = innerWidth < 760;
-layer('.hv-far', small ? 3 : 6, 140, 260, 2, 24, 140, 220);
-layer('.hv-mid', small ? 3 : 5, 260, 460, 56, 74, 90, 150);
-/* cloud bank along the bottom */
-const bank = hero.querySelector('.hv-bank');
-if (bank) { const n = small ? 9 : 16;
-  for (let i = 0; i < n; i++) { const p = document.createElement('i'), s = rnd(200, 420) * (small ? .7 : 1);
-    p.style.width = p.style.height = `${s}px`; p.style.left = `${(i / (n - 1)) * 100 - 8}%`; p.style.bottom = `${-s * rnd(.35, .55)}px`;
-    p.style.animationDelay = `${-rnd(0, 9)}s`; p.style.animationDuration = `${rnd(7, 12)}s`; bank.appendChild(p); } }
 
-/* floating light motes */
-const cv = document.getElementById('hv-motes'), cx = cv && cv.getContext('2d');
+/* hero sky */
+function layer(sel, count, wMin, wMax, topMin, topMax, dMin, dMax, op){
+  const L = hero.querySelector(sel); if (!L) return;
+  for (let i = 0; i < count; i++) { const w = rnd(wMin, wMax), c = cloudImg(w); c.classList.add('cl-drift');
+    c.style.top = `${rnd(topMin, topMax)}%`; c.style.opacity = op; drift(c, rnd(dMin, dMax), -w, 'calc(100vw + 20px)'); L.appendChild(c); }
+}
+layer('.hv-far', small ? 3 : 5, 220, 380, 0, 22, 160, 240, .7);
+layer('.hv-mid', small ? 2 : 4, 380, 640, 46, 66, 110, 170, .95);
+const bank = hero.querySelector('.hv-bank');
+if (bank) for (let i = 0; i < 2; i++) { const b = cloudImg(0, 'assets/clouds/cloud-bank.png'); b.loading = 'eager'; b.className = 'cl-bank'; b.style.left = `${i * 50 - 6}%`; if (i) b.style.setProperty('--flip', '-1'); bank.appendChild(b); }
+
+/* light motes: one sprite drawn once, then blitted */
+const cv = document.getElementById('hv-motes'), cx = cv && cv.getContext('2d', {alpha: true});
+const sprite = document.createElement('canvas'); sprite.width = sprite.height = 32;
+{ const s = sprite.getContext('2d'), g = s.createRadialGradient(16, 16, 0, 16, 16, 16);
+  g.addColorStop(0, 'rgba(222,186,112,.75)'); g.addColorStop(.3, 'rgba(255,232,180,.4)'); g.addColorStop(1, 'rgba(255,240,210,0)'); s.fillStyle = g; s.fillRect(0, 0, 32, 32); }
 let W = 0, H = 0, motes = [];
-function size(){ if (!cv) return; const d = Math.min(devicePixelRatio || 1, 2); W = hero.clientWidth; H = hero.clientHeight;
-  cv.width = W * d; cv.height = H * d; cx.setTransform(d, 0, 0, d, 0, 0);
-  motes = Array.from({length: small ? 40 : 90}, () => ({x: rnd(0, W), y: rnd(0, H), r: rnd(.6, 2.4), v: rnd(.15, .55), s: rnd(0, 6), a: rnd(.35, .95)})); }
-size(); addEventListener('resize', size);
-let mx = 0, my = 0, tx = 0, ty = 0;
+function size(){ if (!cv) return; const d = Math.min(devicePixelRatio || 1, 1.5); W = hero.clientWidth; H = hero.clientHeight;
+  cv.width = Math.round(W * d); cv.height = Math.round(H * d); cx.setTransform(d, 0, 0, d, 0, 0);
+  motes = Array.from({length: small ? 22 : 45}, () => ({x: rnd(0, W), y: rnd(0, H), r: rnd(3, 9), v: rnd(.12, .45), s: rnd(0, 6)})); }
+size(); addEventListener('resize', size, {passive: true});
+
+/* parallax + animation loop — only while the hero is on screen */
+let mx = 0, my = 0, tx = 0, ty = 0, onScreen = true, raf = 0;
 addEventListener('pointermove', e => { tx = e.clientX / innerWidth - .5; ty = e.clientY / innerHeight - .5; }, {passive: true});
-const layers = [...hero.querySelectorAll('[data-depth]')], inner = hero.querySelector('.hv-inner'), sun = hero.querySelector('.hv-sun');
-(function frame(t){
-  requestAnimationFrame(frame);
-  if (document.hidden) return;
-  const y = scrollY; if (y > H * 1.4) return;
-  mx += (tx - mx) * .05; my += (ty - my) * .05;
+const layers = [...hero.querySelectorAll('[data-depth]')], inner = hero.querySelector('.hv-inner');
+function frame(t){
+  raf = 0; if (!onScreen || document.hidden) return;
+  raf = requestAnimationFrame(frame);
+  mx += (tx - mx) * .06; my += (ty - my) * .06;
+  const y = scrollY;
   if (!calm()) {
-    layers.forEach(l => { const d = +l.dataset.depth; l.style.transform = `translate(${-mx * 60 * d}px,${-my * 30 * d + y * d * .6}px)`; });
-    if (inner) { inner.style.transform = `translateY(${y * .35}px)`; inner.style.opacity = `${Math.max(0, 1 - y / (H * .55))}`; }
-    if (sun) sun.style.translate = `${mx * 30}px ${my * 20 + y * .2}px`;
+    for (const l of layers) { const d = +l.dataset.depth; l.style.transform = `translate3d(${(-mx * 50 * d).toFixed(1)}px,${(-my * 24 * d + y * d * .5).toFixed(1)}px,0)`; }
+    if (inner) { inner.style.transform = `translate3d(0,${(y * .3).toFixed(1)}px,0)`; inner.style.opacity = Math.max(0, 1 - y / (H * .6)).toFixed(3); }
   }
   if (!cx || calm()) return;
   cx.clearRect(0, 0, W, H);
   for (const m of motes) {
-    m.y -= m.v; m.x += Math.sin(t / 2000 + m.s) * .25;
-    if (m.y < -10) { m.y = H + 10; m.x = rnd(0, W); }
-    const tw = .55 + .45 * Math.sin(t / 600 + m.s * 3);
-    const g = cx.createRadialGradient(m.x + mx * 20, m.y, 0, m.x + mx * 20, m.y, m.r * 4);
-    g.addColorStop(0, `rgba(222,186,112,${m.a * tw * .55})`); g.addColorStop(.35, `rgba(255,236,190,${m.a * tw * .3})`); g.addColorStop(1, 'rgba(255,240,210,0)');
-    cx.fillStyle = g; cx.beginPath(); cx.arc(m.x + mx * 20, m.y, m.r * 4, 0, 7); cx.fill();
+    m.y -= m.v; m.x += Math.sin(t / 2200 + m.s) * .2; if (m.y < -12) { m.y = H + 12; m.x = rnd(0, W); }
+    cx.globalAlpha = .5 + .5 * Math.sin(t / 650 + m.s * 3); cx.drawImage(sprite, m.x + mx * 16 - m.r, m.y - m.r, m.r * 2, m.r * 2);
   }
-})(0);
+  cx.globalAlpha = 1;
+}
+const kick = () => { if (!raf && onScreen && !document.hidden) raf = requestAnimationFrame(frame); };
+new IntersectionObserver(([e]) => { onScreen = e.isIntersecting; hero.classList.toggle('cl-paused', !onScreen); kick(); }).observe(hero);
+document.addEventListener('visibilitychange', kick);
+kick();
 
-/* ---------- clouds in every panel ---------- */
-function puffCloud(w, cls){
-  const c = document.createElement('div'); c.className = cls; const h = w * .45, n = 5 + Math.round(Math.random() * 3);
-  c.style.width = `${w}px`; c.style.height = `${h}px`;
-  for (let i = 0; i < n; i++) { const p = document.createElement('i'); p.className = 'cl-puff';
-    const s = rnd(.36, .62) * w * (Math.abs(i - (n - 1) / 2) < 1 ? 1.25 : 1);
-    p.style.width = p.style.height = `${s}px`; p.style.left = `${(i / (n - 1)) * (w - s * .75) - s * .1}px`;
-    p.style.bottom = `${-s * .28 + (Math.abs(i - (n - 1) / 2) < 1 ? h * .14 : rnd(0, h * .08))}px`; c.appendChild(p); }
-  return c;
-}
-function sky(host, count, wMin, wMax, opts = {}){
-  const box = document.createElement('div'); box.className = 'cl-sky'; box.setAttribute('aria-hidden', 'true');
-  const hw = host.clientWidth || 600;
-  for (let i = 0; i < count; i++) {
-    const w = rnd(wMin, wMax), c = puffCloud(w, 'cl-cloud'), dur = rnd(opts.dMin || 60, opts.dMax || 110);
-    const bottomBias = opts.bottom ?? true;
-    if (bottomBias) c.style.bottom = `${rnd(-w * .32, -w * .12)}px`; else c.style.top = `${rnd(0, 100)}%`;
-    c.style.setProperty('--a', `${-w}px`); c.style.setProperty('--b', `${hw + 40}px`);
-    c.style.animationDuration = `${dur}s`; c.style.animationDelay = `${-rnd(0, dur)}s`;
-    if (opts.opacity) c.style.opacity = opts.opacity;
-    box.appendChild(c);
-  }
-  host.prepend(box); host.classList.add('cl-host');
-}
+/* ---------- clouds inside every panel (CSS animation, paused off-screen) ---------- */
 const panels = document.querySelectorAll('.lx-card:not(.lx-prod), .detail-card, .feature-explorer, .lx-proof>div, .contact-section, .comparison, .lx-prod .lx-body');
+const pio = new IntersectionObserver(es => es.forEach(e => e.target.classList.toggle('cl-run', e.isIntersecting)), {rootMargin: '100px'});
 panels.forEach(p => {
-  const big = p.clientWidth > 700, dark = p.matches('.contact-section');
-  if (dark) p.classList.add('cl-dark');
-  sky(p, big ? 4 : 2, big ? 200 : 120, big ? 340 : 220, {opacity: dark ? null : (big ? .9 : .85)});
-});
-/* soft cloud bands between sections */
-document.querySelectorAll('main > section, main > .scope-strip').forEach((s, i) => {
-  if (i === 0 || innerWidth < 760) return;
-  const band = document.createElement('div'); band.className = 'cl-band'; band.setAttribute('aria-hidden', 'true');
-  s.parentNode.insertBefore(band, s);
-  const box = document.createElement('div'); box.className = 'cl-sky'; band.appendChild(box);
-  for (let k = 0; k < 3; k++) { const w = rnd(260, 480), c = puffCloud(w, 'cl-cloud'), dur = rnd(120, 200);
-    c.style.top = `${rnd(10, 60)}%`; c.style.opacity = .7;
-    c.style.setProperty('--a', `${-w}px`); c.style.setProperty('--b', `${innerWidth + 40}px`);
-    c.style.animationDuration = `${dur}s`; c.style.animationDelay = `${-rnd(0, dur)}s`; box.appendChild(c); }
+  const box = document.createElement('div'); box.className = 'cl-sky'; box.setAttribute('aria-hidden', 'true');
+  const pw = p.clientWidth || 600, big = pw > 700, n = big ? 3 : 2;
+  for (let i = 0; i < n; i++) { const w = rnd(big ? 260 : 170, big ? 420 : 260), c = cloudImg(w); c.classList.add('cl-drift');
+    c.style.bottom = `${-rnd(.05, .2) * w}px`; drift(c, rnd(70, 120), -w, `${pw + 20}px`); box.appendChild(c); }
+  p.prepend(box); p.classList.add('cl-host'); if (p.matches('.contact-section')) p.classList.add('cl-dark');
+  pio.observe(p);
 });
 })();

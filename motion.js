@@ -6,9 +6,6 @@ const root = document.documentElement;
 const calm = () => root.classList.contains('motion-off');
 const fine = matchMedia('(hover:hover) and (pointer:fine)').matches;
 
-/* soft background blobs */
-const blobs = document.createElement('div'); blobs.className = 'lx-blobs'; blobs.setAttribute('aria-hidden', 'true');
-blobs.innerHTML = '<i></i><i></i><i></i>'; document.body.prepend(blobs);
 
 /* scroll progress */
 const prog = document.createElement('div'); prog.className = 'lx-progress'; document.body.appendChild(prog);
@@ -75,54 +72,52 @@ heads.forEach(h => hio.observe(h));
 // gradient text loses its clip when split into spans — re-apply to each char
 $$('.lx-chrome.lx-split .ch, .lx-chrome .lx-split .ch, .lx-split .lx-chrome .ch').forEach(c => c.classList.add('lx-chrome'));
 
-/* ---------- custom cursor ---------- */
+/* ---------- custom cursor (animates only while the pointer moves) ---------- */
 if (fine) {
   const ring = document.createElement('div'), dot = document.createElement('div');
   ring.className = 'lx-cursor'; dot.className = 'lx-cursor-dot'; document.body.append(ring, dot);
-  let x = innerWidth / 2, y = innerHeight / 2, rx = x, ry = y;
-  addEventListener('pointermove', e => { x = e.clientX; y = e.clientY; dot.style.transform = `translate(${x}px,${y}px) translate(-50%,-50%)`; }, {passive: true});
+  let x = innerWidth / 2, y = innerHeight / 2, rx = x, ry = y, cr = 0;
+  const loop = () => { rx += (x - rx) * .22; ry += (y - ry) * .22;
+    ring.style.transform = `translate3d(${rx.toFixed(1)}px,${ry.toFixed(1)}px,0) translate(-50%,-50%)`;
+    cr = (Math.abs(x - rx) + Math.abs(y - ry) > .3) ? requestAnimationFrame(loop) : 0; };
+  addEventListener('pointermove', e => { x = e.clientX; y = e.clientY; dot.style.transform = `translate3d(${x}px,${y}px,0) translate(-50%,-50%)`; if (!cr) cr = requestAnimationFrame(loop); }, {passive: true});
   addEventListener('pointerdown', () => ring.classList.add('down')); addEventListener('pointerup', () => ring.classList.remove('down'));
-  document.addEventListener('pointerover', e => ring.classList.toggle('hover', !!e.target.closest('a,button,summary,input,.lx-card,.detail-card,[data-feature]')));
+  document.addEventListener('pointerover', e => ring.classList.toggle('hover', !!e.target.closest('a,button,summary,input,.lx-card,.detail-card,[data-feature]')), {passive: true});
   document.addEventListener('pointerleave', () => { ring.style.opacity = 0; dot.style.opacity = 0; });
   document.addEventListener('pointerenter', () => { ring.style.opacity = 1; dot.style.opacity = 1; });
-  (function loop(){ rx += (x - rx) * .18; ry += (y - ry) * .18; ring.style.transform = `translate(${rx}px,${ry}px) translate(-50%,-50%)`; requestAnimationFrame(loop); })();
 }
 
-/* ---------- scroll-linked ---------- */
-const heroVisual = $('.hero-visual'), heroCopy = $('.hero-copy'), track = $('.lx-track');
-let lastY = scrollY, vel = 0, marqX = 0, trackW = 0;
-const measure = () => { trackW = track ? track.scrollWidth / 2 : 0; };
-addEventListener('resize', measure); addEventListener('load', measure); measure();
-if (track) track.style.animation = 'none';
-(function tick(){
+/* ---------- scroll-linked (runs only when scrolling) ---------- */
+const nav = $('.navigation');
+let sraf = 0, navShadow = null;
+function onScrollFrame(){
+  sraf = 0;
   const y = scrollY, h = document.documentElement.scrollHeight - innerHeight;
-  prog.style.transform = `scaleX(${h > 0 ? y / h : 0})`;
-  vel += ((y - lastY) - vel) * .12; lastY = y;
-  if (!calm()) {
-    if (heroVisual && !heroVisual.closest('.hv') && y < innerHeight * 1.2) {
-      const p = y / innerHeight;
-      heroVisual.style.translate = `0 ${p * 120}px`;
-      heroVisual.style.rotate = `${p * -10}deg`;
-      heroVisual.style.scale = `${1 - p * .18}`;
-      if (heroCopy) { heroCopy.style.translate = `0 ${p * 60}px`; heroCopy.style.opacity = `${1 - p * 1.1}`; }
+  prog.style.transform = `scaleX(${h > 0 ? (y / h).toFixed(4) : 0})`;
+  const ns = y > 20; if (nav && ns !== navShadow) { nav.style.boxShadow = ns ? 'var(--shadow-lg)' : ''; navShadow = ns; }
+  if (stage && frame) {
+    const r = stage.getBoundingClientRect();
+    if (r.bottom > 0 && r.top < innerHeight) {
+      const span = Math.max(1, r.height - innerHeight * .9);
+      const p = Math.min(1, Math.max(0, (innerHeight * .65 - r.top) / span)), e = 1 - Math.pow(1 - p, 3);
+      if (calm() || innerWidth < 761) frame.style.transform = 'none';
+      else frame.style.transform = `translate3d(0,${((1 - e) * 30).toFixed(1)}px,0) rotateX(${((1 - e) * 20).toFixed(2)}deg) scale(${(.86 + e * .14).toFixed(4)})`;
     }
-    if (track && trackW) { marqX -= .6 + Math.abs(vel) * .35; if (-marqX >= trackW) marqX += trackW; track.style.transform = `translateX(${marqX}px) skewX(${Math.max(-12, Math.min(12, -vel * .4))}deg)`; }
   }
-  const nav = $('.navigation'); if (nav) nav.style.boxShadow = y > 20 ? 'var(--shadow-lg)' : '';
-  if (stage) {
-    const r = stage.getBoundingClientRect(), span = Math.max(1, r.height - innerHeight * .9);
-    const p = Math.min(1, Math.max(0, (innerHeight * .65 - r.top) / span));
-    const e = 1 - Math.pow(1 - p, 3);
-    stage.style.setProperty('--p', e.toFixed(4)); frame.style.setProperty('--p', e.toFixed(4));
-  }
-  requestAnimationFrame(tick);
-})();
+}
+addEventListener('scroll', () => { if (!sraf) sraf = requestAnimationFrame(onScrollFrame); }, {passive: true});
+addEventListener('resize', () => { if (!sraf) sraf = requestAnimationFrame(onScrollFrame); }, {passive: true});
+addEventListener('load', onScrollFrame);
+setTimeout(onScrollFrame, 0);
 })();
 
 /* ---------- landing app preview ---------- */
 var stage = document.querySelector('.lx-appstage'), frame = document.querySelector('.lx-appframe');
 (() => {
 if (!frame) return;
+const __vis = new WeakMap(), __io = new IntersectionObserver(es => es.forEach(e => __vis.set(e.target, e.isIntersecting)), {rootMargin: '80px'});
+const seen = el => { if (!el) return false; if (!__vis.has(el)) { __vis.set(el, false); __io.observe(el); } return __vis.get(el); };
+
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const one = sel => $$(sel, frame).forEach(b => b.addEventListener('click', () => { $$(sel, frame).forEach(x => x.classList.remove('on')); b.classList.add('on'); }));
 one('.ax-side button'); one('.ax-pre'); one('.ax-sws i');
@@ -138,13 +133,13 @@ if (tl) for (let i = 0; i < 46; i++) { const b = document.createElement('i'); b.
 const ring = document.getElementById('ax-ring'), set = (k, v) => $$(`[data-ax="${k}"]`, frame).forEach(el => el.textContent = v);
 const gc = document.getElementById('ax-graph'), gx = gc && gc.getContext('2d'), pts = Array.from({length: 90}, () => .7);
 setInterval(() => {
-  if (document.hidden) return;
+  if (document.hidden || !seen(frame)) return;
   const f = 232 + Math.round(Math.random() * 12), cps = 12 + Math.round(Math.random() * 4);
   set('fps', f); set('ms', `${(1000 / f).toFixed(1)}ms`); set('ping', `${30 + Math.round(Math.random() * 9)}ms`); set('cpu', `${26 + Math.round(Math.random() * 10)}%`); set('cps', cps);
   if (ring) ring.style.strokeDashoffset = 314 * (1 - cps / 20);
 }, 320);
 setInterval(() => {
-  if (!gx || document.hidden) return;
+  if (!gx || document.hidden || !seen(frame)) return;
   const d = devicePixelRatio || 1, w = gc.clientWidth, h = gc.clientHeight; if (!w || !h) return;
   if (gc.width !== Math.round(w * d)) { gc.width = Math.round(w * d); gc.height = Math.round(h * d); }
   gx.setTransform(d, 0, 0, d, 0, 0); gx.clearRect(0, 0, w, h);

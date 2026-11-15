@@ -11,7 +11,7 @@ let ambientFrame = 0, ambientLast = 0, bootPending = false;
 const boot = $('boot'), content = $('site-content'), hero = document.querySelector('.hero');
 function getCanvasContext(element){try{return element?.getContext('2d')||null;}catch{return null;}}
 const bootCanvas = $('boot-canvas'), bootContext = getCanvasContext(bootCanvas);
-const ambient = $('ambient'), ctx = getCanvasContext(ambient);
+const ambient = $('ambient'), ctx = null; // ambient field disabled for performance (white edition)
 const smooth = x => {const c=Math.min(1,Math.max(0,x));return c*c*(3-2*c);};
 const escapeText = text => String(text).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const featureData = {

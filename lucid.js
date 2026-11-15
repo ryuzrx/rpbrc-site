@@ -3,6 +3,9 @@
 (() => {
 const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const calm = () => document.documentElement.classList.contains('motion-off');
+const __vis = new WeakMap(), __io = new IntersectionObserver(es => es.forEach(e => __vis.set(e.target, e.isIntersecting)), {rootMargin: '80px'});
+const seen = el => { if (!el) return false; if (!__vis.has(el)) { __vis.set(el, false); __io.observe(el); } return __vis.get(el); };
+
 
 /* card spotlight + edge light */
 $$('.lx-card').forEach(c => c.addEventListener('pointermove', e => {
@@ -52,12 +55,12 @@ const tl = $('#lx-tl'); if (tl) for (let i = 0; i < 40; i++) { const b = documen
 
 /* live numbers: hero chips + overlay pane */
 const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
-setInterval(() => { if (document.hidden) return;
+setInterval(() => { if (document.hidden || !(seen($('.lx-win')) || seen($('.hero.hv')))) return;
   const v = Math.max(30, target - 7 + Math.round(Math.random() * 10)), ms = (1000 / v).toFixed(1);
   set('lx-hfps', v); set('lx-hft', ms); set('lx-gf', v); set('lx-gm', ms); set('lx-gp', 30 + Math.round(Math.random() * 9)); }, 260);
 const gc = $('#lx-graph'), gx = gc?.getContext('2d'), pts = Array.from({length: 80}, () => .72);
 setInterval(() => {
-  if (!gx || document.hidden) return; const d = devicePixelRatio || 1, w = gc.clientWidth, h = gc.clientHeight; if (!w) return;
+  if (!gx || document.hidden || !seen(gc)) return; const d = devicePixelRatio || 1, w = gc.clientWidth, h = gc.clientHeight; if (!w) return;
   if (gc.width !== Math.round(w * d)) { gc.width = Math.round(w * d); gc.height = Math.round(h * d); }
   gx.setTransform(d, 0, 0, d, 0, 0); gx.clearRect(0, 0, w, h);
   pts.shift(); pts.push(Math.min(.92, Math.max(.5, pts[pts.length - 1] + (Math.random() - .5) * .1)));
@@ -100,10 +103,10 @@ addEventListener('load', placeOn); addEventListener('resize', placeOn); setTimeo
 
 // mini-app tabs cycle on their own
 $$('[data-cycle]').forEach((row, k) => { let i = 0; const tabs = [...row.children];
-  setTimeout(() => setInterval(() => { if (calm() || document.hidden) return; tabs[i].classList.remove('on'); i = (i + 1) % tabs.length; tabs[i].classList.add('on'); }, 1800), k * 600); });
+  setTimeout(() => setInterval(() => { if (calm() || document.hidden || !seen(row)) return; tabs[i].classList.remove('on'); i = (i + 1) % tabs.length; tabs[i].classList.add('on'); }, 1800), k * 600); });
 
 // live numbers in the product visuals + hero ping chip
-setInterval(() => { if (document.hidden) return;
+setInterval(() => { if (document.hidden || !seen($('.lx-products'))) return;
   const f = 232 + Math.round(Math.random() * 12), ping = 30 + Math.round(Math.random() * 9);
   const vals = {fps: f, ping, ms: (1000 / f).toFixed(1), cpu: `${26 + Math.round(Math.random() * 10)}%`, cps: 12 + Math.round(Math.random() * 4)};
   $$('[data-live]').forEach(el => el.textContent = vals[el.dataset.live]);
