@@ -1,0 +1,161 @@
+/* rpbrc — "heaven" hero. Bright sky, sun, light rays, drifting clouds, floating motes.
+   The wordmark is Rpbrc with the R icon as the first letter. */
+.hero.hv{display:block;position:relative;min-height:100vh;min-height:100svh;padding:0;margin:-92px 0 0;max-width:none;width:100%;overflow:hidden;isolation:isolate;
+  background:radial-gradient(120% 60% at 50% 0%,#5b8ff0 0%,transparent 60%),linear-gradient(180deg,#1f4fc4 0%,#3b72e3 26%,#6b9bf2 48%,#a8c6fa 66%,#dbe8fd 82%,var(--bg) 100%)}
+.hv-sky{position:absolute;inset:0;z-index:0;pointer-events:none}
+.hv-sun{position:absolute;left:50%;top:-6%;width:min(1000px,120vw);aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;
+  background:radial-gradient(closest-side,#fffaf0f2 0%,#fff3d8b3 14%,#ffffff55 32%,#ffffff1a 52%,transparent 72%);animation:hv-breathe 9s ease-in-out infinite}
+@keyframes hv-breathe{50%{transform:translate(-50%,-50%) scale(1.06);opacity:.9}}
+.hv-rays{position:absolute;left:50%;top:-6%;width:200vmax;height:200vmax;transform:translate(-50%,-50%);opacity:.32;mix-blend-mode:soft-light;
+  background:repeating-conic-gradient(from 0deg,#ffffff 0deg 3deg,transparent 3deg 14deg);
+  -webkit-mask:radial-gradient(closest-side,#000 0%,#0008 30%,transparent 62%);mask:radial-gradient(closest-side,#000 0%,#0008 30%,transparent 62%);
+  animation:hv-spin 140s linear infinite}
+@keyframes hv-spin{to{transform:translate(-50%,-50%) rotate(360deg)}}
+.hv-orbits{position:absolute;inset:0;width:100%;height:100%;fill:none;stroke:#ffffff;stroke-opacity:.28;stroke-width:1}
+.hv-orbits ellipse{transform-origin:800px 330px;animation:hv-orbit 60s linear infinite;stroke-dasharray:3 9}
+.hv-orbits ellipse:nth-child(2){animation-duration:90s;animation-direction:reverse;stroke-dasharray:none;stroke-opacity:.18}
+.hv-orbits ellipse:nth-child(3){animation-duration:120s;stroke-dasharray:1 14}
+@keyframes hv-orbit{to{transform:rotate(360deg)}}
+#hv-motes{position:absolute;inset:0;width:100%;height:100%}
+
+/* clouds — built from puffs by hero.js */
+.hv-layer{position:absolute;inset:0}
+.hv-cloud{position:absolute;will-change:transform;animation:hv-drift linear infinite}
+.hv-cloud i{position:absolute;border-radius:50%;background:radial-gradient(circle at 42% 36%,#ffffff 0%,#ffffff 38%,#f3f7ffe6 58%,#e6eefc00 72%)}
+.hv-far .hv-cloud{opacity:.55;filter:blur(3px)}
+.hv-mid .hv-cloud{opacity:.95}
+@keyframes hv-drift{from{transform:translateX(var(--from))}to{transform:translateX(var(--to))}}
+.hv-bank{position:absolute;left:-10%;right:-10%;bottom:-6%;height:42%}
+.hv-bank i{position:absolute;bottom:0;border-radius:50%;background:radial-gradient(circle at 45% 35%,#fff 0%,#fff 45%,#f5f8ffd9 62%,#eef4fe00 72%);animation:hv-bob 9s ease-in-out infinite}
+.hv-bank:after{content:'';position:absolute;left:0;right:0;bottom:0;height:45%;background:linear-gradient(180deg,transparent,var(--bg) 85%)}
+@keyframes hv-bob{50%{translate:0 -10px}}
+/* soft prism streaks */
+.hv-prism{position:absolute;height:3px;width:34vw;border-radius:3px;filter:blur(3px);opacity:.7;mix-blend-mode:screen;
+  background:linear-gradient(90deg,transparent,#ffd6f5,#cfe3ff,#d9fff2,#fff4c9,transparent)}
+.hv-prism.p1{left:-4vw;top:26%;transform:rotate(-12deg);animation:hv-shine 7s ease-in-out infinite}
+.hv-prism.p2{right:-6vw;top:46%;width:26vw;transform:rotate(9deg);animation:hv-shine 9s ease-in-out -3s infinite}
+@keyframes hv-shine{0%,100%{opacity:.25;translate:-30px 0}50%{opacity:.85;translate:30px 0}}
+
+/* content */
+.hv-inner{position:relative;z-index:3;display:flex;flex-direction:column;align-items:center;text-align:center;padding:150px 20px 0;min-width:0}
+.hero.hv .hv-word{flex-direction:row;color:#fff;display:flex;align-items:center;justify-content:center;gap:0;margin:0;font-size:clamp(84px,13.5vw,200px);line-height:1;letter-spacing:-.075em;
+  font-weight:800;perspective:900px;animation:none;opacity:0;transform:translateY(40px) scale(.94);filter:blur(10px);transition:opacity 1.2s var(--spring),transform 1.4s var(--spring),filter 1.2s var(--spring)}
+.hero.hv.hv-ready .hv-word{opacity:1;transform:none;filter:none}
+.hv-icon{position:relative;width:.86em;height:.86em;flex:none;margin-right:.035em;transform:translateY(.02em)}
+.hv-icon .hero-logo{position:relative;z-index:2;width:100%!important;height:100%;max-width:none;filter:drop-shadow(0 .06em .09em #1b3a8a55) drop-shadow(0 .015em .02em #0b0b0d40);
+  border-radius:22%;transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .7s var(--spring)}
+/* glossy sheen that sweeps across the icon */
+.hv-icon:after{content:'';position:absolute;inset:3.5%;z-index:3;border-radius:22%;pointer-events:none;overflow:hidden;
+  background:linear-gradient(115deg,transparent 30%,#ffffffb3 46%,#ffffff26 52%,transparent 60%) no-repeat;background-size:250% 100%;background-position:150% 0;animation:hv-gloss 5.5s var(--spring) 1.6s infinite;
+  -webkit-mask:linear-gradient(#000,#000);mix-blend-mode:overlay}
+@keyframes hv-gloss{0%{background-position:150% 0}40%,100%{background-position:-60% 0}}
+/* halo: iridescent ring + glow */
+.hv-halo{position:absolute;inset:-14%;z-index:1;border-radius:30%;
+  background:conic-gradient(from var(--hv-a,0deg),#ffffff00,#ffe9fb,#d6e6ff,#dafff3,#fff6d6,#ffffff00 60%);filter:blur(14px);opacity:.95;animation:hv-halo 6s linear infinite}
+@property --hv-a{syntax:"<angle>";inherits:false;initial-value:0deg}
+@keyframes hv-halo{to{--hv-a:360deg}}
+.hv-text{color:#fff;background:linear-gradient(180deg,#ffffff 0%,#ffffff 46%,#e3ecff 62%,#ffffff 100%);-webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 .04em .08em #0d2a7a73) drop-shadow(0 .01em .01em #0d2a7a40);padding-right:.04em}
+.hv-tag{margin:18px 0 0;font-size:clamp(28px,3.6vw,52px);font-weight:600;letter-spacing:-.045em;line-height:1.1;color:#fff;text-shadow:0 2px 30px #0d2a7a80,0 1px 3px #0d2a7a59}
+.hv-sub{margin:14px 0 0;font-size:clamp(17px,1.6vw,22px);color:#ffffffe6;max-width:640px;text-shadow:0 1px 18px #0d2a7a99,0 1px 2px #0d2a7a66}
+.hv-actions{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:34px}
+.hv-btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:12px;padding:18px 34px;border-radius:999px;font-size:17px;font-weight:600;
+  transition:transform .5s var(--spring),box-shadow .4s,background .3s;isolation:isolate}
+.hv-solid{background:#fff;color:#0b0b0d;box-shadow:0 1px 0 #fff inset,0 18px 40px -14px #1b3a8a80,0 0 0 6px #ffffff33}
+.hv-solid:hover{box-shadow:0 1px 0 #fff inset,0 24px 50px -14px #1b3a8a99,0 0 0 9px #ffffff40}
+.hv-solid:after{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(110deg,transparent 30%,#c9dcff99 50%,transparent 70%);transform:translateX(-120%);animation:hv-btnsh 3.4s ease-in-out 2s infinite}
+@keyframes hv-btnsh{55%,100%{transform:translateX(120%)}}
+.hv-glass{color:#fff;background:#0d2a7a33;border:1.5px solid #ffffff8c;backdrop-filter:blur(14px) saturate(1.4);-webkit-backdrop-filter:blur(14px) saturate(1.4);box-shadow:0 18px 40px -18px #1b3a8a80}
+.hv-glass:hover{background:#ffffff40}
+.hv-meta{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px 12px;margin-top:22px;font-size:12.5px;color:#fff;text-shadow:0 1px 10px #0d2a7a99}
+.hv-meta i{width:3px;height:3px;border-radius:50%;background:#ffffffb3}
+.hv-link{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:6px;padding:6px 11px;border-radius:999px;background:#0d2a7a33;border:1px solid #ffffff55;color:#fff;transition:background .25s}
+.hv-link:hover{background:#ffffff45}
+.hv-ready .hv-tag,.hv-ready .hv-sub,.hv-ready .hv-actions,.hv-ready .hv-meta{animation:hv-up 1.1s var(--spring) both}
+.hv-ready .hv-tag{animation-delay:.25s}.hv-ready .hv-sub{animation-delay:.38s}.hv-ready .hv-actions{animation-delay:.5s}.hv-ready .hv-meta{animation-delay:.62s}
+.hv-tag,.hv-sub,.hv-actions,.hv-meta{opacity:0}
+.hv-ready .hv-tag,.hv-ready .hv-sub,.hv-ready .hv-actions,.hv-ready .hv-meta{opacity:1}
+@keyframes hv-up{from{opacity:0;transform:translateY(26px);filter:blur(8px)}to{opacity:1;transform:none;filter:none}}
+
+/* nav over the sky */
+.navigation{z-index:40}
+
+/* app window rises out of the clouds */
+.lx-appstage{margin-top:-30vh;height:200vh;z-index:4}
+.lx-appsticky{align-items:flex-start;padding-top:96px}
+.lx-appcap{display:none}
+.lx-appframe{transform-origin:50% 0;
+  transform:translateY(calc((1 - var(--p)) * 30px)) rotateX(calc((1 - var(--p)) * 20deg)) scale(calc(.86 + var(--p) * .14));
+  box-shadow:0 2px 6px #0b0b0d14,
+    calc(22px - var(--p) * 22px) calc(-16px + var(--p) * 16px) 0 -8px #ffffffd0,
+    calc(44px - var(--p) * 44px) calc(-32px + var(--p) * 32px) 0 -16px #ffffff90,
+    0 calc(40px + var(--p) * 40px) calc(90px + var(--p) * 60px) -30px #1b3a8a55}
+.lx-appglow{top:55%}
+
+@media(max-width:760px){
+  .hero.hv{margin-top:-80px}
+  .hv-inner{padding-top:120px}
+  .hero.hv .hv-word{font-size:clamp(70px,21vw,110px)}
+  .hv-btn{padding:15px 24px;font-size:15px}
+  .hv-orbits{display:none}
+  .lx-appstage{margin-top:-12vh}
+  .hero.hv{min-height:auto;padding-bottom:22vh}
+}
+.motion-off .hv-sun,.motion-off .hv-rays,.motion-off .hv-orbits ellipse,.motion-off .hv-cloud,.motion-off .hv-bank i,.motion-off .hv-prism,.motion-off .hv-halo,.motion-off .hv-icon:after{animation:none}
+.motion-off .hero.hv .hv-word,.motion-off .hv-tag,.motion-off .hv-sub,.motion-off .hv-actions,.motion-off .hv-meta{opacity:1;transform:none;filter:none;animation:none}
+@media(prefers-reduced-motion:reduce){html:not(.motion-enabled) .hv-word,html:not(.motion-enabled) .hv-tag,html:not(.motion-enabled) .hv-sub,html:not(.motion-enabled) .hv-actions,html:not(.motion-enabled) .hv-meta{opacity:1;transform:none;filter:none}}
+
+/* ===================== white heaven ===================== */
+.hero.hv{background:radial-gradient(90% 55% at 50% 0%,#fffdf7 0%,transparent 70%),linear-gradient(180deg,#ffffff 0%,#f6f8fc 45%,#eef2f9 72%,var(--bg) 100%)}
+.hv-sun{top:-10%;background:radial-gradient(closest-side,#fff8e6 0%,#fff3d6cc 18%,#fffaf033 45%,transparent 72%)}
+.hv-rays{top:-10%;opacity:.55;mix-blend-mode:normal;background:repeating-conic-gradient(from 0deg,#e9edf6 0deg 2.5deg,transparent 2.5deg 13deg)}
+.hv-orbits{stroke:#0b0b0d;stroke-opacity:.07}
+.hv-prism{mix-blend-mode:multiply;opacity:.5;background:linear-gradient(90deg,transparent,#ffd6f0,#d4e4ff,#d6fbee,#fff1c4,transparent)}
+
+/* shaded white clouds that read on white */
+.cl-puff,.hv-cloud i,.hv-bank i{background:radial-gradient(circle at 42% 34%,#ffffff 0%,#ffffff 36%,#f4f6fb 54%,#e4e9f3 65%,#e4e9f300 72%)}
+.hv-cloud,.cl-cloud{filter:drop-shadow(0 18px 24px #8a9bbd2e)}
+.hv-far .hv-cloud{opacity:.8;filter:blur(1.5px) drop-shadow(0 14px 18px #8a9bbd22)}
+.hv-bank i{background:radial-gradient(circle at 45% 35%,#fff 0%,#fff 44%,#f3f5fa 60%,#e6ebf4 67%,#e6ebf400 72%)}
+.hv-bank:after{background:linear-gradient(180deg,transparent,var(--bg) 80%)}
+
+/* hero text: ink on white */
+.hero.hv .hv-word{color:var(--ink)}
+.hv-text{background:linear-gradient(180deg,#0b0b0d 0%,#25252b 45%,#6e6e78 60%,#16161a 78%,#0b0b0d 100%);-webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 .05em .06em #0b0b0d26)}
+.hv-icon .hero-logo{filter:drop-shadow(0 .07em .1em #0b0b0d47) drop-shadow(0 .015em .02em #0b0b0d33)}
+.hv-halo{opacity:.75}
+.hv-tag{color:var(--ink);text-shadow:none}
+.hv-sub{color:var(--silver);text-shadow:none}
+.hv-solid{background:var(--ink);color:#fff;box-shadow:0 1px 0 #ffffff26 inset,0 18px 40px -14px #0b0b0d80,0 0 0 6px #0b0b0d0d}
+.hv-solid:hover{box-shadow:0 1px 0 #ffffff26 inset,0 24px 50px -14px #0b0b0d99,0 0 0 9px #0b0b0d12}
+.hv-solid:after{background:linear-gradient(110deg,transparent 30%,#ffffff40 50%,transparent 70%)}
+.hv-glass{color:var(--ink);background:#ffffffb3;border-color:var(--edge-strong);box-shadow:var(--shadow-md)}
+.hv-glass:hover{background:#fff}
+.hv-meta{color:var(--silver);text-shadow:none}
+.hv-meta i{background:#0b0b0d40}
+.hv-link{background:#fff;border-color:var(--edge-strong);color:var(--bright);box-shadow:var(--shadow-sm)}
+.hv-link:hover{background:var(--ink);color:#fff}
+.lx-appframe{box-shadow:0 2px 6px #0b0b0d14,
+    calc(22px - var(--p) * 22px) calc(-16px + var(--p) * 16px) 0 -8px #ffffff,
+    calc(22px - var(--p) * 22px) calc(-16px + var(--p) * 16px) 0 -7px #0b0b0d14,
+    calc(44px - var(--p) * 44px) calc(-32px + var(--p) * 32px) 0 -16px #ffffffd9,
+    0 calc(40px + var(--p) * 40px) calc(90px + var(--p) * 60px) -30px #0b0b0d4d}
+
+/* ===================== clouds in every panel ===================== */
+.cl-host{position:relative;overflow:hidden;isolation:isolate}
+.cl-host>*:not(.cl-sky){position:relative;z-index:1}
+.cl-sky{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;border-radius:inherit}
+.cl-cloud{position:absolute;animation:cl-drift linear infinite}
+.cl-puff{position:absolute;border-radius:50%}
+@keyframes cl-drift{from{transform:translateX(var(--a))}to{transform:translateX(var(--b))}}
+.cl-host.cl-dark .cl-cloud{filter:none;opacity:.12}
+.cl-host.cl-dark .cl-puff{background:radial-gradient(circle,#fff 0%,#fff 40%,#ffffff00 70%)}
+/* page-wide cloud bands between sections */
+.cl-band{position:relative;height:0;z-index:0;pointer-events:none}
+.cl-band .cl-sky{position:absolute;left:0;right:0;top:-160px;height:320px;inset:auto 0 auto 0;border-radius:0;overflow:visible}
+.motion-off .cl-cloud{animation:none}
+@media(max-width:760px){.cl-band{display:none}}
+main>section,main>div:not(.cl-band){position:relative;z-index:1}
+.cl-band{z-index:0}
+.cl-band .cl-cloud{opacity:.55!important}

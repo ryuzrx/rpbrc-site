@@ -99,7 +99,7 @@ if (track) track.style.animation = 'none';
   prog.style.transform = `scaleX(${h > 0 ? y / h : 0})`;
   vel += ((y - lastY) - vel) * .12; lastY = y;
   if (!calm()) {
-    if (heroVisual && y < innerHeight * 1.2) {
+    if (heroVisual && !heroVisual.closest('.hv') && y < innerHeight * 1.2) {
       const p = y / innerHeight;
       heroVisual.style.translate = `0 ${p * 120}px`;
       heroVisual.style.rotate = `${p * -10}deg`;
