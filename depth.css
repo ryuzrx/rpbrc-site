@@ -130,3 +130,11 @@ h2:hover,.lx-prod:hover h3{background-position:0 60%}
 .button:active{transform:scale(.97)}
 @media (prefers-reduced-motion:reduce){.cl-sky{animation:none}.js-reveals .reveal{filter:none}.lx-card:hover,.detail-card:hover{transform:none}}
 .motion-off .cl-sky{animation:none}
+
+/* fixes after live check */
+.lx-aio .lx-prod-top .lx-os{display:inline-flex;flex:none;width:auto;height:auto;min-width:0;overflow:visible;aspect-ratio:auto}
+h2,.lx-val,.edition-card h3,.lx-prod h3{-webkit-text-fill-color:transparent}
+.lx-prod h3 em{-webkit-text-fill-color:currentColor}
+.lx-dark .cl-sky .cl-img,.cl-host.cl-dark .cl-img{opacity:.1!important}
+.lx-dark .cl-sky .cl-img:nth-child(2n),.cl-host.cl-dark .cl-img:nth-child(2n){opacity:.05!important}
+.lx-note{position:relative;z-index:2}
