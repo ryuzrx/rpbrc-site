@@ -39,3 +39,20 @@
     },{threshold: .35}).observe(hero);
   }
 })();
+
+/* all-in-one card: one product, mac / windows switch */
+(() => {
+  const card = document.querySelector('.lx-aio'); if (!card) return;
+  const dl = card.querySelector('.lx-os-dl'), req = card.querySelector('.lx-os-req');
+  card.querySelectorAll('.lx-os button').forEach(b => b.addEventListener('click', () => {
+    const os = b.dataset.os;
+    card.querySelectorAll('.lx-os button').forEach(x => x.setAttribute('aria-selected', String(x === b)));
+    req.textContent = req.dataset[os];
+    dl.href = dl.dataset[os];
+    if (os === 'mac') { dl.setAttribute('download', ''); dl.removeAttribute('target'); dl.removeAttribute('rel'); }
+    else { dl.removeAttribute('download'); dl.target = '_blank'; dl.rel = 'noopener noreferrer'; }
+    dl.firstChild.textContent = os === 'mac' ? 'download for mac ' : 'get it for windows ';
+  }));
+  // default to the visitor's platform
+  if (/Win/i.test(navigator.platform || navigator.userAgent)) card.querySelector('[data-os="win"]').click();
+})();

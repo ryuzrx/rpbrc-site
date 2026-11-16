@@ -83,3 +83,50 @@ dialog h2{font-size:36px}
 @media (prefers-reduced-motion:reduce){.lx-orbit.d3 .slab,.lx-orbit.d3 .shadow{animation:none}}
 .motion-off .lx-orbit.d3 .slab,.motion-off .lx-orbit.d3 .shadow{animation:none}
 @media (max-width:720px){:root{--sec-pad:76px;--r-card:26px}.lx-orbit.d3 .slab{width:88px;height:88px}.lx-stage:after{display:none}}
+
+/* ---------- metallic type (the "rpbrc." look), everywhere ---------- */
+h2,.lx-val,.edition-card h3,.lx-prod h3{background:linear-gradient(180deg,#0b0b0d 0%,#2a2a30 38%,#8a8a93 52%,#1a1a1f 70%,#0b0b0d 100%);background-size:100% 220%;background-position:0 0;
+  -webkit-background-clip:text;background-clip:text;color:transparent;transition:background-position 1.4s var(--spring)}
+.lx-dark h2,.lx-dark .lx-val,.lx-dark h3,.contact-section h2,dialog h2{background-image:linear-gradient(180deg,#fff 0%,#e6e6ea 38%,#8e8e96 54%,#f2f2f5 72%,#fff 100%)}
+h2 .lx-chrome{animation:none}
+.lx-prod h3 em{-webkit-text-fill-color:currentColor;opacity:.45}
+h2:hover,.lx-prod:hover h3{background-position:0 60%}
+
+/* ---------- single all-in-one card ---------- */
+.lx-aio{grid-column:1/-1;display:grid!important;grid-template-columns:1.1fr 1fr;min-height:0}
+.lx-aio .lx-vis{height:auto;min-height:380px}
+.lx-aio .lx-mini{top:50%;transform:translate(-50%,-50%) perspective(900px) rotateX(8deg) rotateY(-8deg);width:min(86%,520px)}
+.lx-prod.lx-aio:hover .lx-mini{transform:translate(-50%,-52%) perspective(900px) rotateX(0) rotateY(0)}
+.lx-aio .lx-mini.shot{background:#000;border:1px solid #ffffff1f;padding:0;width:min(92%,640px);overflow:hidden}
+.lx-aio .lx-mini.shot img{display:block;width:100%;height:auto;border-radius:inherit}
+.lx-os{position:relative;display:inline-flex;gap:2px;padding:3px;border-radius:var(--r-pill);background:var(--raised,#f0f0f2);border:1px solid var(--edge)}
+.lx-os button{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:7px;padding:7px 13px;border-radius:var(--r-pill);font-size:12.5px;font-weight:500;color:var(--silver);transition:background .35s var(--spring),color .25s}
+.lx-os button svg{width:13px;height:13px;fill:currentColor}
+.lx-os button[aria-selected=true]{background:var(--ink,#0b0b0d);color:#fff;box-shadow:0 4px 12px -4px #0b0b0d66}
+.lx-os button:focus-visible{outline:2px solid currentColor;outline-offset:2px}
+.lx-os-req{font-size:12px;color:var(--silver);margin-right:auto;padding-left:14px}
+@media(max-width:900px){.lx-aio{grid-template-columns:1fr}.lx-aio .lx-vis{min-height:280px}}
+
+/* ---------- performance bars: shimmer stays inside the fill ---------- */
+.lx-fill{overflow:hidden}
+.lx-track2{border-radius:var(--r-pill)}
+
+/* ---------- clouds: soft, layered, fade out before the text ---------- */
+.cl-sky{-webkit-mask-image:linear-gradient(to top,#000 0%,#000 18%,transparent 62%);mask-image:linear-gradient(to top,#000 0%,#000 18%,transparent 62%)}
+.cl-sky .cl-img{opacity:.5;filter:blur(.4px)}
+.cl-sky .cl-img:nth-child(2n){opacity:.32;filter:blur(1.6px)}
+.lx-dark .cl-sky .cl-img,.cl-host.cl-dark .cl-img{opacity:.16!important;mix-blend-mode:screen;filter:blur(1px) brightness(1.15)}
+.lx-dark .cl-sky .cl-img:nth-child(2n),.cl-host.cl-dark .cl-img:nth-child(2n){opacity:.09!important;filter:blur(2.5px)}
+.cl-sky{animation:cl-breathe 14s ease-in-out infinite alternate}
+@keyframes cl-breathe{from{translate:0 6px}to{translate:0 -6px}}
+
+/* ---------- motion: one easing, softer reveals, consistent lift ---------- */
+:root{--spring:cubic-bezier(.22,1,.36,1)}
+.js-reveals .reveal{filter:blur(6px);transition:opacity .9s var(--spring),transform .9s var(--spring),filter .9s var(--spring)}
+.js-reveals .reveal.is-visible{filter:none}
+.lx-card,.detail-card,.edition-card{transition:transform .6s var(--spring),box-shadow .6s var(--spring),border-color .3s,opacity .5s var(--spring),filter .5s}
+.lx-card:hover,.detail-card:hover{transform:translateY(-4px)}
+.button{transition:transform .45s var(--spring),background .3s,border-color .3s,box-shadow .45s var(--spring)}
+.button:active{transform:scale(.97)}
+@media (prefers-reduced-motion:reduce){.cl-sky{animation:none}.js-reveals .reveal{filter:none}.lx-card:hover,.detail-card:hover{transform:none}}
+.motion-off .cl-sky{animation:none}
