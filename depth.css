@@ -1,0 +1,85 @@
+/* depth.css — loaded last.
+   1) one set of tokens every section uses (type, radii, spacing), matching the landing page.
+   2) real-depth versions of the site's 3D pieces: client orbit, external scene, app windows, hero mark. */
+
+:root{
+  --r-card:32px;--r-inner:22px;--r-tile:14px;--r-pill:999px;
+  --sec-pad:112px;
+  --h2-size:clamp(36px,4.2vw,56px);--h2-track:-.05em;
+  --display-size:clamp(44px,6vw,76px);
+  --eyebrow-size:13px;
+  /* extrusion colours for slabs (light paper vs dark glass) */
+  --ex-1:#d9d9de;--ex-2:#cfcfd5;--ex-3:#c4c4cb;
+}
+.lx-dark{--ex-1:#26262b;--ex-2:#1d1d21;--ex-3:#151518}
+
+/* ---------- consistency ---------- */
+.section{padding-block:var(--sec-pad)}
+h2{font-size:var(--h2-size);letter-spacing:var(--h2-track);line-height:1.06}
+#editions h2,.contact-section h2{font-size:var(--display-size);line-height:1.02}
+dialog h2{font-size:36px}
+.eyebrow,.feature-kicker{font-size:var(--eyebrow-size);font-weight:500;letter-spacing:.01em}
+
+.lx-card,.lx-prod,.feature-explorer,.detail-card,.edition-card,.contact-section{border-radius:var(--r-card)}
+.lx-win{border-radius:var(--r-inner)}
+.lx-prod .lx-vis,.lx-scene{border-radius:var(--r-inner)}
+.lx-mini{border-radius:var(--r-tile)}
+.lx-hud,.lx-mini-tile{border-radius:10px}
+.lx-orbit .tag,.lx-scene .lbl{border-radius:var(--r-pill);padding:7px 12px;font-size:11px}
+
+/* ---------- shared: slab thickness + glare ---------- */
+.lx-win,.lx-mini{
+  box-shadow:0 1px 0 var(--ex-1),0 2px 0 var(--ex-1),0 3px 0 var(--ex-2),0 4px 0 var(--ex-2),0 5px 0 var(--ex-3),0 6px 0 var(--ex-3),
+             0 30px 50px -20px #0b0b0d40,0 70px 120px -40px #0b0b0d66;
+}
+.lx-dark .lx-win,.lx-dark .lx-mini{
+  box-shadow:0 0 0 1px #ffffff14,inset 0 1px #ffffff14,0 1px 0 var(--ex-1),0 2px 0 var(--ex-1),0 3px 0 var(--ex-2),0 4px 0 var(--ex-2),0 5px 0 var(--ex-3),0 6px 0 var(--ex-3),
+             0 40px 80px -30px #000,0 80px 140px -40px #000c;
+}
+.lx-glare{position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:5;mix-blend-mode:soft-light;
+  background:radial-gradient(520px circle at var(--gx,30%) var(--gy,0%),#ffffff55,transparent 55%),linear-gradient(115deg,#ffffff22 0%,transparent 32%);
+  opacity:.9;transition:opacity .4s}
+.lx-dark .lx-glare{mix-blend-mode:screen;background:radial-gradient(520px circle at var(--gx,30%) var(--gy,0%),#ffffff12,transparent 55%),linear-gradient(115deg,#ffffff0d 0%,transparent 30%)}
+.lx-win,.lx-mini{position:relative}
+.lx-stage{position:sticky}
+.lx-stage:after{content:'';position:absolute;left:50%;bottom:calc(50% - 300px);width:min(70%,520px);height:46px;transform:translateX(-50%);
+  background:radial-gradient(50% 50% at 50% 50%,#0b0b0d55,transparent 70%);filter:blur(10px);pointer-events:none;z-index:-1}
+.lx-dark .lx-stage:after{background:radial-gradient(50% 50% at 50% 50%,#000,transparent 70%)}
+
+/* ---------- hero mark: extruded tile ---------- */
+.hero-logo{filter:drop-shadow(0 1px 0 #3a3a40) drop-shadow(0 1px 0 #2e2e33) drop-shadow(0 1px 0 #242428) drop-shadow(0 1px 0 #1b1b1e)
+  drop-shadow(0 1px 0 #141416) drop-shadow(0 26px 30px #0b0b0d55)}
+
+/* ---------- client: orbit around a real 3D slab ---------- */
+.lx-orbit.d3{perspective:900px;perspective-origin:50% 40%}
+.lx-orbit.d3 .o3{position:absolute;inset:0;display:grid;place-items:center;transform-style:preserve-3d;transform:rotateX(-10deg)}
+.lx-orbit.d3 .o3>*{grid-area:1/1}
+.lx-orbit.d3 .r{transform-style:flat}
+.lx-orbit.d3 .slab{position:relative;width:112px;height:112px;transform-style:preserve-3d;animation:d3-yaw 9s ease-in-out infinite alternate,d3-bob 6s ease-in-out infinite}
+.lx-orbit.d3 .slab i,.lx-orbit.d3 .slab img{position:absolute;inset:0;border-radius:24%;backface-visibility:hidden}
+.lx-orbit.d3 .slab i{backface-visibility:visible;background:linear-gradient(90deg,#3c3c43,#141417 45%,#2b2b31);transform:translateZ(var(--z))}
+.lx-orbit.d3 .slab img{width:100%;height:100%;animation:none;filter:none;transform:translateZ(11px)}
+.lx-orbit.d3 .slab img.back{transform:rotateY(180deg) translateZ(11px);filter:brightness(.55)}
+.lx-orbit.d3 .shadow{width:150px;height:40px;border-radius:50%;background:radial-gradient(closest-side,#000c,transparent);filter:blur(6px);transform:translateY(96px) rotateX(90deg);animation:d3-shadow 6s ease-in-out infinite}
+.lx-prod:not(.lx-dark) .lx-orbit.d3 .shadow{background:radial-gradient(closest-side,#0b0b0d55,transparent)}
+@keyframes d3-yaw{from{transform:rotateY(-32deg) rotateX(6deg)}to{transform:rotateY(32deg) rotateX(-4deg)}}
+@keyframes d3-bob{50%{translate:0 -10px}}
+@keyframes d3-shadow{50%{opacity:.6;scale:.85}}
+
+/* ---------- external: extruded city blocks on the grid ---------- */
+.lx-scene .sky{background:radial-gradient(70% 90% at 50% 100%,#ffffff1c,transparent 70%)}
+.lx-scene:before{content:'';position:absolute;left:0;right:0;top:66%;height:1px;background:linear-gradient(90deg,transparent,#ffffff40,transparent);z-index:1}
+.lx-scene:after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,transparent 40%,#0b0b0d 100%);z-index:2}
+.lx-scene .blk{--d:16px;border:0;border-radius:2px 2px 0 0;background:linear-gradient(180deg,#34343b,#1a1a1f);z-index:1;
+  box-shadow:inset 1px 0 #ffffff14,inset 0 1px #ffffff22}
+.lx-scene .blk:before{content:'';position:absolute;left:0;bottom:100%;width:100%;height:var(--d);transform-origin:bottom left;transform:skewX(-45deg);
+  background:linear-gradient(90deg,#4a4a52,#3a3a41)}
+.lx-scene .blk:after{content:'';position:absolute;left:100%;top:0;width:var(--d);height:100%;transform-origin:top left;transform:skewY(-45deg);
+  background:linear-gradient(180deg,#232328,#0f0f12)}
+.lx-scene .blk:nth-of-type(odd){--d:22px}
+.lx-scene .lx-xhair,.lx-scene .lx-hud,.lx-scene .lbl{z-index:4}
+
+/* ---------- motion & small screens ---------- */
+@media (prefers-reduced-motion:reduce){.lx-orbit.d3 .slab,.lx-orbit.d3 .shadow{animation:none}}
+.motion-off .lx-orbit.d3 .slab,.motion-off .lx-orbit.d3 .shadow{animation:none}
+@media (max-width:720px){:root{--sec-pad:76px;--r-card:26px}.lx-orbit.d3 .slab{width:88px;height:88px}.lx-stage:after{display:none}}
