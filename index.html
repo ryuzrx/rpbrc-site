@@ -1,139 +1,121 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f7f7f8"><title>rpbrc — less between you and the game</title><meta name="description" content="rpbrc for roblox: free all-in-one apps for windows and macos, plus rpbrc client and rpbrc external. unlocked fps, tuned engine settings, replay capture and customization."><link rel="icon" type="image/png" href="assets/mark.png"><link rel="stylesheet" href="assets/type.css?v=4"><link rel="preload" href="assets/mark.png" as="image"><link rel="stylesheet" href="style.css?v=4"><link rel="stylesheet" href="lucid.css?v=2"><link rel="stylesheet" href="theme-light.css?v=2"><link rel="stylesheet" href="appstage.css?v=4">
-<link rel="stylesheet" href="screen.css?v=1"><link rel="stylesheet" href="hero.css?v=5"><link rel="stylesheet" href="balance.css?v=1"><link rel="stylesheet" href="dusk.css?v=4"><link rel="stylesheet" href="depth.css?v=4"><script src="assets/boot-points.js" defer></script><script src="site.js?v=8" defer></script><script src="lucid.js?v=6" defer></script><script src="motion.js?v=6" defer></script><script src="hero.js?v=6" defer></script><script src="depth.js?v=3" defer></script><script src="screen.js?v=1" defer></script></head>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#060607">
+<title>rpbrc — less between you and the game</title>
+<meta name="description" content="rpbrc for roblox: free all-in-one apps for windows and macos, plus rpbrc client and rpbrc external. unlocked fps, tuned engine settings, replay capture and customization.">
+<link rel="icon" type="image/png" href="assets/r.png">
+<link rel="stylesheet" href="site.css?v=70">
+</head>
 <body>
-<div class="scene-backdrop" aria-hidden="true"><canvas id="ambient"></canvas><div class="scene-vignette"></div></div>
-<a class="skip-link" href="#main">skip to content</a>
-<div class="boot" id="boot" hidden role="dialog" aria-modal="true" aria-label="rpbrc launch animation"><button id="skip-boot" class="boot-skip">skip intro <span>esc</span></button><div class="boot-center"><div class="boot-art"><svg class="boot-ring" viewBox="0 0 240 240" aria-hidden="true"><circle class="ring-track" cx="120" cy="120" r="112"/><circle id="ring-progress" cx="120" cy="120" r="112"/></svg><canvas id="boot-canvas" width="560" height="560" aria-hidden="true"></canvas><img id="boot-mark" src="assets/mark.png" width="150" height="150" alt=""></div><strong class="boot-title">rpbrc</strong><div class="boot-checklist" aria-hidden="true"><span>visuals · ready</span><span>interface · ready</span><span>download · ready</span><span>welcome · rpbrc</span></div></div><span class="boot-bottom">less between you and the game</span></div>
-<div id="site-content">
-<header class="navigation"><div class="nav-inner wrap"><a class="brand" href="#" aria-label="rpbrc home"><img src="assets/mark.png" width="34" height="34" alt=""><span>rpbrc</span></a><nav aria-label="main navigation"><a href="#editions">products</a><a href="#features">features</a><a href="#performance">performance</a><a href="#questions">questions</a></nav><a class="button nav-download" href="rpbrc-free.zip" download>download free <span class="download-glyph" aria-hidden="true">↓</span></a></div></header>
-<main id="main" tabindex="-1">
-<section class="hero hv" id="top">
-<div class="hv-sky" aria-hidden="true">
- <div class="hv-sun"></div><div class="hv-rays"></div>
- <svg class="hv-orbits" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice"><ellipse cx="800" cy="330" rx="520" ry="520"/><ellipse cx="800" cy="330" rx="760" ry="760"/><ellipse cx="800" cy="330" rx="1020" ry="1020"/><line x1="0" y1="330" x2="1600" y2="330"/><line x1="800" y1="0" x2="800" y2="900"/></svg>
- <canvas id="hv-motes"></canvas>
- <div class="hv-layer hv-far" data-depth=".15"></div>
- <div class="hv-layer hv-mid" data-depth=".3"></div>
- <div class="hv-bank" data-depth=".5"></div>
- <div class="hv-prism p1"></div><div class="hv-prism p2"></div>
-</div>
-<div class="hero-copy hv-inner">
- <h1 class="hero-visual hv-word" id="hero-visual" aria-label="rpbrc"><span class="hv-icon"><span class="hv-halo"></span><img class="hero-logo" id="hero-logo" src="assets/mark.png" width="1024" height="1024" alt=""></span><span class="hv-text" aria-hidden="true">pbrc</span></h1>
- <p class="hv-tag">less between you and the game.</p>
- <p class="hv-sub">free all-in-ones for mac &amp; windows. client &amp; external when you want more.</p>
- <div class="hv-actions"><a class="hv-btn hv-solid magnetic" href="rpbrc-free.zip" download>download free <span aria-hidden="true">↓</span></a><a class="hv-btn hv-glass magnetic" href="#editions">see products</a></div>
- <div class="hv-meta"><span>windows 10 / 11</span><i></i><span>macos 15+</span><i></i><span>v2.1.0</span><button class="hv-link" data-install>how to install</button><button class="hv-link hv-replay" id="replay-boot"><svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 9a8 8 0 1 1 0 7M4 3v6h6"/></svg><span id="replay-label">replay the launch</span></button></div>
-</div>
-</section>
 
-<section class="lx-appstage" id="preview" aria-label="rpbrc app preview"><div class="lx-appsticky">
-<p class="lx-appcap">scroll to open the menu <span aria-hidden="true">↓</span></p>
-<div class="lx-appglow" aria-hidden="true"></div>
-<div class="lx-appframe lx-dark gs-frame" id="lx-appframe">
- <div class="gs-screen" aria-hidden="true"><div class="gs-grid"></div><div class="gs-vig"></div></div>
- <div class="gs-menu" role="group" aria-label="rpbrc in-game menu preview">
-  <div class="gs-bar"><div class="gs-tabs"><button type="button" class="gs-tab" data-page="display" aria-label="Display" title="Display"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></button><button type="button" class="gs-tab on" data-page="clicker" aria-label="Clicker" title="Clicker"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3l12 7-5 1.5L10 17z"/><path d="M14 14l4 4"/></svg></button><button type="button" class="gs-tab" data-page="switch" aria-label="Quick switch" title="Quick switch"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h13l-3-3M20 16H7l3 3"/></svg></button><button type="button" class="gs-tab" data-page="perf" aria-label="Performance" title="Performance"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17l5-6 4 4 8-9"/><path d="M3 21h18"/></svg></button><button type="button" class="gs-tab" data-page="style" aria-label="Appearance" title="Appearance"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 2v5M12 17v5M2 12h5M17 12h5"/></svg></button><button type="button" class="gs-tab" data-page="engine" aria-label="Engine" title="Engine"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/></svg></button><button type="button" class="gs-tab" data-page="utility" aria-label="Utility" title="Utility"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="5" rx="2.5"/><rect x="3" y="13" width="18" height="5" rx="2.5"/><circle cx="16" cy="8.5" r="1.2"/><circle cx="8" cy="15.5" r="1.2"/></svg></button><button type="button" class="gs-tab" data-page="flags" aria-label="FastFlags" title="FastFlags"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg></button><button type="button" class="gs-tab" data-page="studio" aria-label="Studio" title="Studio"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18c1.2 0 1.6-.9 1.2-1.8-.5-1 .2-2.2 1.3-2.2H17a4 4 0 0 0 4-4c0-5-4-10-9-10z"/><circle cx="7.5" cy="11" r="1"/><circle cx="10" cy="7" r="1"/><circle cx="15" cy="7.5" r="1"/></svg></button></div><div class="gs-brand"><img src="assets/mark.png" alt="">rpbrc</div></div>
-  <div class="gs-pages">
-   <div class="gs-page on" data-page="clicker">
-    <div class="gs-card gs-hero"><div class="gs-badge"><i></i><i></i><b data-ax="cps">14</b><small>cps</small></div>
-     <div class="gs-hero-t"><p class="gs-cap">autoclicker · <span class="gs-live"><i></i>running</span></p><h5>clicker</h5><p class="gs-mut">hold <kbd>mouse 5</kbd> to click. cdc keeps it human.</p></div></div>
-    <div class="gs-card">
-     <div class="gs-row"><div><b>clicks per second</b><span>target speed while held.</span></div><span class="gs-val">14.00</span></div>
-     <div class="gs-slider"><i style="width:56%"></i><em style="left:56%"></em></div>
-     <div class="gs-row"><div><b>mode</b><span>toggle or hold to click.</span></div><div class="gs-seg"><span>toggle</span><span class="on">hold</span></div></div>
-     <div class="gs-row"><div><b>hit fix</b><span>steadier timing under load.</span></div><span class="gs-pill on">ON</span></div>
-    </div>
-   </div>
-   <div class="gs-page" data-page="display">
-    <div class="gs-card"><div class="gs-row"><div><b>render resolution</b><span>fewer pixels = more fps.</span></div></div>
-     <div class="gs-opts"><div class="gs-opt on"><span class="gs-check"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><strong>1x</strong><b>performance</b><span>1920 × 1080</span><small>max fps</small></div><div class="gs-opt"><span class="gs-ring"></span><strong>2x</strong><b>retina</b><span>3840 × 2160</span><small>sharpest</small></div></div></div>
-    <div class="gs-card"><div class="gs-row"><div><b>gpu pixel load</b><span>about 75% less gpu work.</span></div><span class="gs-val">1× pixels</span></div><div class="gs-slider"><i style="width:25%"></i></div></div>
-   </div>
-   <div class="gs-page" data-page="flags">
-    <div class="gs-card"><div class="gs-row"><div><b>potato mode</b><span>grey sky, soft textures, far render distance.</span></div><span class="gs-pill on">ON</span></div>
-     <p class="gs-mut gs-mono">injector: applied 112 flags · live, no restart</p></div>
-    <div class="gs-card gs-code"><span>{</span><span>&nbsp; "FFlagDebugSkyGray": true,</span><span>&nbsp; "DFIntRenderTextureMipBias": 300,</span><span>&nbsp; "FIntFRMDrawDistanceScalePercent": 300</span><span>}</span></div>
-   </div>
-   <div class="gs-page" data-page="studio">
-    <div class="gs-card"><div class="gs-row"><div><b>themes</b><span>tints the whole menu.</span></div><span class="gs-val">8 looks</span></div>
-     <div class="gs-themes"><i class="on" style="--a:#c7c7cc"><span class="gs-check"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span></i><i style="--a:#4df2c7"></i><i style="--a:#ff7a38"></i><i style="--a:#ff8fc2"></i><i style="--a:#5a9eff"></i><i style="--a:#a894f0"></i></div></div>
-    <div class="gs-card"><div class="gs-row"><div><b>background</b><span>what sits behind the menu.</span></div><div class="gs-seg"><span class="on">scene</span><span>gradient</span><span>solid</span></div></div></div>
-   </div>
+<nav id="nav"><div class="wrap">
+  <a class="brand" href="#top"><img src="assets/r.png" alt="">rpbrc</a>
+  <div class="links"><a href="#pricing">Pricing</a><a href="#faq">Questions</a><a href="https://discord.gg/rpbrc">Discord</a></div>
+  <a class="btn dark sm" href="rpbrc-free.zip">Get rpbrc</a>
+</div></nav>
+
+<main id="top">
+<header class="hero">
+  <div class="sky" aria-hidden="true"><div class="sun"></div><div class="rays"></div>
+    <img class="cl c1" src="assets/clouds/silver-1.png" alt=""><img class="cl c2" src="assets/clouds/silver-2.png" alt=""><img class="cl c3" src="assets/clouds/silver-3.png" alt=""><img class="cl c4" src="assets/clouds/silver-4.png" alt=""><img class="bank" src="assets/clouds/silver-bank.png" alt=""></div>
+  <div class="in">
+    <h1>rpbrc <span>all-in-one</span></h1>
+    <p class="tag">Less between you and the game.</p>
+    <p class="lead">Roblox locks you to 60 fps and hides its best settings. rpbrc unlocks them in one free app for Mac and Windows.</p>
+    <div class="cta"><a class="btn solid" href="rpbrc-free.zip">Download free ↓</a><a class="btn" href="#pricing">See pricing</a></div>
   </div>
-  <div class="gs-foot"><span class="gs-check"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span>F9 to close</span><em data-gs-title>Clicker</em></div>
- </div>
- <div class="gs-hud"><b data-ax="fps">240</b><small>fps</small><i></i><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M4 12h16M12 4c2.5 2.5 2.5 13.5 0 16M12 4c-2.5 2.5-2.5 13.5 0 16"/></svg><b data-ax="ping">34ms</b></div>
+</header>
+
+<div class="show wrap">
+  <div class="stage big reveal" aria-hidden="true"><div class="tilt"><div class="r3d"></div></div></div>
+  <p class="label reveal">rpbrc all-in-one</p>
+  <h2 class="reveal">Everything you used five tools for.</h2>
+  <p class="sub reveal">An fps unlocker, a settings editor, a clicker, an overlay and a clip recorder — rolled into one small native app you open before you play.</p>
 </div>
-</div></section>
-<div class="scope-strip wrap"><span>one app. all in one.</span><div><span>click</span><span>practice</span><span>tune</span><span>capture</span><span>personalize</span></div></div>
-<div class="lx-marquee lx-dark" aria-hidden="true"><div class="lx-track"><span>fps unlocker</span><span>engine presets</span><span>low-latency mode</span><span>live overlay</span><span>instant replay</span><span>custom fonts</span><span>crosshair</span><span>profiles & keybinds</span><span>graphics control</span><span>fps unlocker</span><span>engine presets</span><span>low-latency mode</span><span>live overlay</span><span>instant replay</span><span>custom fonts</span><span>crosshair</span><span>profiles & keybinds</span><span>graphics control</span></div></div>
-<section class="section wrap lx-intro" id="about"><p class="eyebrow reveal">introducing rpbrc</p>
-<p class="lx-big" id="lx-words">roblox should run as fast as your hardware allows. instead you get a *60 *fps *cap, settings buried in json files, and a pile of separate tools. rpbrc brings it into *one *clean *app — unlock your frame rate, apply tuned engine settings, and launch already optimized. free on mac and windows.</p>
-<div class="lx-proof reveal lx-stagger"><div><strong class="lx-chrome" data-count="2">0</strong><p>native clients — windows and macos</p></div><div><strong class="lx-chrome" data-count="4">0</strong><p>products — two free, two paid</p></div><div><strong class="lx-chrome" data-count="360">0</strong><p>max fps target — or fully uncapped</p></div></div>
+
+
+
+
+<section id="pricing" class="wrap center">
+  <div class="stage sm reveal" aria-hidden="true"><div class="tilt"><div class="r3d"></div></div></div>
+  <div class="head reveal"><h2>Pricing</h2><p>The all-in-one is free for good. Client and External are for people who want to go deeper.</p></div>
+  <div class="cards">
+    <article class="card feat reveal">
+      <span class="flag">Free forever</span>
+      <div class="stage xs reveal" aria-hidden="true"><div class="tilt"><div class="r3d"></div></div></div>
+      <h3>rpbrc all-in-one</h3><p class="d">Your whole Roblox setup in one app.</p>
+      <div class="price">$0<small>forever</small></div>
+      <ul><li>FPS unlocker &amp; engine presets</li><li>Clicker, profiles &amp; keybinds</li><li>Instant replay capture</li><li>Crosshair overlay</li></ul>
+      <a class="btn solid" href="rpbrc-free.zip">Download free</a>
+      <p class="fine">Mac &amp; Windows</p>
+    </article>
+    <article class="card reveal">
+      <div class="stage xs reveal" aria-hidden="true"><div class="tilt"><div class="r3d"></div></div></div>
+      <h3>rpbrc client</h3><p class="d">Every setting, searchable, plus a media studio.</p>
+      <div class="price">Ask<small>on Discord</small></div>
+      <ul><li>Searchable library of engine flags</li><li>Live CPU, GPU &amp; ping graphs</li><li>Screenshot &amp; clip library with trimming</li><li>Theme, layout &amp; logo studio</li></ul>
+      <a class="btn dark" href="https://discord.gg/rpbrc">Get client</a>
+      <p class="fine">Priority support included</p>
+    </article>
+    <article class="card reveal">
+      <div class="stage xs reveal" aria-hidden="true"><div class="tilt"><div class="r3d"></div></div></div>
+      <h3>rpbrc external</h3><p class="d">A separate window that sits on top of Roblox.</p>
+      <div class="price">Ask<small>on Discord</small></div>
+      <ul><li>Crosshair over fullscreen</li><li>FPS, frame time &amp; ping HUD</li><li>Hotkeys &amp; per-game profiles</li><li>Lightweight, always on top</li></ul>
+      <a class="btn dark" href="https://discord.gg/rpbrc">Get external</a>
+      <p class="fine">Priority support included</p>
+    </article>
+  </div>
 </section>
 
-<section class="section wrap" id="features"><div class="section-heading reveal"><div><p class="eyebrow">less switching. more playing.</p><h2>a place for<br>every part of your setup.</h2></div><p>from finding your rhythm to saving your best moments, the essentials are right where you need them.</p></div>
-<div class="feature-explorer reveal"><div class="feature-tabs" role="tablist" aria-label="explore rpbrc features"><button id="tab-clicker" role="tab" aria-selected="true" aria-controls="feature-panel" data-feature="clicker"><span>01</span>clicker</button><button id="tab-practice" role="tab" aria-selected="false" aria-controls="feature-panel" tabindex="-1" data-feature="practice"><span>02</span>practice</button><button id="tab-engine" role="tab" aria-selected="false" aria-controls="feature-panel" tabindex="-1" data-feature="engine"><span>03</span>engine</button><button id="tab-capture" role="tab" aria-selected="false" aria-controls="feature-panel" tabindex="-1" data-feature="capture"><span>04</span>capture</button><button id="tab-personalize" role="tab" aria-selected="false" aria-controls="feature-panel" tabindex="-1" data-feature="personalize"><span>05</span>personalize</button></div><div id="feature-panel" class="feature-panel" role="tabpanel" aria-labelledby="tab-clicker" tabindex="0"><div class="feature-copy"><p class="feature-kicker" id="feature-kicker">find your rhythm</p><h3 id="feature-title">the little details<br>between every click.</h3><p id="feature-description">set your clicks per second and hold time. save the combinations that work for you, then switch with a keybind.</p><span class="feature-edition" id="feature-edition">included in free & paid</span></div><div class="feature-facts" id="feature-facts"><div><span>01</span><strong>your pace</strong><p>adjust clicks per second and hold time.</p></div><div><span>02</span><strong>your profiles</strong><p>save a setup and switch without starting over.</p></div><div><span>03</span><strong>your timing</strong><p>frame-sync options and precision controls.</p></div></div></div></div>
-<div class="detail-grid"><article class="detail-card reveal"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3v8m0 10v8M3 16h8m10 0h8M16 7a9 9 0 1 0 0 18 9 9 0 0 0 0-18"/></svg><h3>a little more focus.</h3><p>position your crosshair exactly where you want it, with an overlay that works over fullscreen roblox.</p><span>crosshair</span></article><article class="detail-card reveal"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 8h20M6 16h20M6 24h20M12 4v8m9 0v8M12 20v8"/></svg><h3>a setup that feels yours.</h3><p>choose your roblox font and icon colors. adjust the macos input and motion settings you care about.</p><span>mods & tweaks</span></article><article class="detail-card reveal"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="7"/><path d="M11 16h10m-5-5v10"/></svg><h3>familiar from the first click.</h3><p>native controls, clear settings, and a black-and-silver interface. everything together, without the clutter.</p><span>built with swiftui</span></article></div>
+<section id="faq" class="wrap center">
+  <div class="stage sm reveal" aria-hidden="true"><div class="tilt"><div class="r3d"></div></div></div>
+  <div class="head reveal"><h2>Questions</h2></div>
+  <div class="faq reveal">
+    <details><summary>What exactly is rpbrc?</summary><p>A companion app for Roblox. It doesn't replace Roblox — it changes the settings Roblox reads when it starts (like the fps cap and render options) and adds tools around the game, like an overlay and clip recorder.</p></details>
+    <details><summary>Which permissions does it need, and why?</summary><p>On Mac: Accessibility, so the clicker and keybinds can work, and Screen Recording, so instant replay can capture the game. You only grant them when you turn those tools on.</p></details>
+    <details><summary>What happens when Roblox updates?</summary><p>Your fps unlock and presets usually keep working. Roblox sometimes drops or ignores individual engine settings — when that happens we update the presets.</p></details>
+    <details><summary>How much fps will I actually get?</summary><p>It depends on your hardware and the game. rpbrc removes the cap and lightens the load; it can't make a slow GPU fast.</p></details>
+    <details><summary>Is there a Windows version?</summary><p>Yes — for Windows 10 and 11, alongside the macOS app. Grab it from Discord.</p></details>
+    <details><summary>How do I get Client or External?</summary><p>Both are paid. Join Discord to ask about pricing and availability.</p></details>
+  </div>
 </section>
 
-<section class="section wrap lx-dark lx-band" id="app"><div class="section-heading reveal"><div><p class="eyebrow">inside the app</p><h2>every frame,<br>accounted for.</h2></div><p>everything you need to make roblox run better, in one window. try it — the controls on the right work.</p></div>
-<div class="lx-show"><div class="lx-steps"><div class="lx-step on" data-i="0"><span>01 — unlock</span><h3>drop the 60 fps cap.</h3><p>match your monitor — 120, 144, 240 or fully uncapped. drag the slider in the window. it’s live.</p><div class="lx-tags"><span>fps unlocker</span><span>vsync control</span><span>refresh match</span></div></div><div class="lx-step" data-i="1"><span>02 — tune</span><h3>presets that just work.</h3><p>tested engine settings for every kind of pc. switch in a click, revert in a click.</p><div class="lx-tags"><span>competitive</span><span>balanced</span><span>potato pc</span><span>custom json</span></div></div><div class="lx-step" data-i="2"><span>03 — strip</span><h3>lighter than the in-game slider.</h3><p>cut shadows, post-processing, grass and textures further than roblox’s own settings go.</p><div class="lx-tags"><span>shadows</span><span>post fx</span><span>low-latency</span></div></div><div class="lx-step" data-i="3"><span>04 — monitor</span><h3>see what your game is doing.</h3><p>a live overlay with fps, frame time and ping, right on top of the game.</p><div class="lx-tags"><span>fps</span><span>frame time</span><span>ping</span><span>cpu / gpu</span></div></div><div class="lx-step" data-i="4"><span>05 — capture</span><h3>never miss the clip.</h3><p>instant replay saves the last moments with your clip keybind. no obs required.</p><div class="lx-tags"><span>instant replay</span><span>screenshots</span><span>trimming</span></div></div><div class="lx-step" data-i="5"><span>06 — personalize</span><h3>make it yours.</h3><p>fonts, cursors, crosshair and app themes. black and silver by default, tuned to you.</p><div class="lx-tags"><span>themes</span><span>fonts</span><span>crosshair</span><span>sounds</span></div></div></div>
-<div class="lx-stage"><div class="lx-win"><div class="lx-bar"><i></i><i></i><i></i><b>rpbrc — <span id="lx-wtitle">unlock</span></b></div>
-<div class="lx-side"><div class="lx-logo"><img src="assets/mark.png" alt="">rpbrc</div><button class="on" type="button"><svg viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></svg>unlock</button><button type="button"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h10M4 18h6"/></svg>presets</button><button type="button"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3v18"/></svg>graphics</button><button type="button"><svg viewBox="0 0 24 24"><path d="M3 17l5-6 4 4 8-10"/></svg>overlay</button><button type="button"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="m16 10 5-3v10l-5-3"/></svg>capture</button><button type="button"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/></svg>style</button></div>
-<div class="lx-panes">
-<div class="lx-pane on"><h5>frame rate</h5><p class="lx-sub">target for every roblox window</p><div class="lx-n"><span id="lx-fv">240</span><small>fps</small></div><input type="range" class="lx-range" id="lx-fr" min="60" max="361" value="240" aria-label="target frame rate"><div class="lx-ticks"><span>60</span><span>144</span><span>240</span><span>∞</span></div><div style="margin-top:14px"><div class="lx-opt">match display refresh <button class="lx-sw on" aria-pressed="true" aria-label="match display refresh"></button></div><div class="lx-opt">vsync <button class="lx-sw" aria-pressed="false" aria-label="vsync"></button></div></div></div>
-<div class="lx-pane"><h5>engine presets</h5><p class="lx-sub">applied before launch · revert any time</p><button class="lx-preset on"><div><b>competitive</b><small>max frames, lowest latency</small></div><i></i></button><button class="lx-preset"><div><b>balanced</b><small>smooth with most visuals</small></div><i></i></button><button class="lx-preset"><div><b>potato pc</b><small>everything stripped back</small></div><i></i></button></div>
-<div class="lx-pane"><h5>graphics</h5><p class="lx-sub">beyond the in-game quality slider</p><div class="lx-opt">shadows <button class="lx-sw" aria-label="shadows"></button></div><div class="lx-opt">post-processing <button class="lx-sw" aria-label="post-processing"></button></div><div class="lx-opt">grass &amp; foliage <button class="lx-sw" aria-label="grass"></button></div><div class="lx-opt">low-latency mode <button class="lx-sw on" aria-label="low-latency mode"></button></div><div class="lx-opt">texture quality <span style="font-size:12px;color:var(--silver)">low</span></div></div>
-<div class="lx-pane"><h5>live overlay</h5><p class="lx-sub">updated every frame</p><canvas class="lx-graph" id="lx-graph"></canvas><div class="lx-3"><div><small>FPS</small><b id="lx-gf">238</b></div><div><small>FRAME</small><b id="lx-gm">4.2</b></div><div><small>PING</small><b id="lx-gp">34</b></div></div></div>
-<div class="lx-pane"><h5>instant replay</h5><p class="lx-sub">save the last moments with your clip keybind</p><div class="lx-clip"><div class="lx-rec"><i></i>REC</div></div><div class="lx-tl" id="lx-tl"></div></div>
-<div class="lx-pane"><h5>theme</h5><p class="lx-sub">the app and your crosshair</p><div class="lx-swatches"><button class="on" aria-label="black" style="background:linear-gradient(135deg,#000,#2b2b30)"></button><button aria-label="silver" style="background:linear-gradient(135deg,#d8d8de,#7d7d84)"></button><button aria-label="white" style="background:linear-gradient(135deg,#fff,#c7c7cc)"></button><button aria-label="graphite" style="background:linear-gradient(135deg,#3a3a40,#0d0d10)"></button></div><div class="lx-fonts"><button class="on" style="font-family:inherit">Aa</button><button style="font-family:Georgia,serif">Aa</button><button style="font-family:ui-monospace,Menlo,monospace">Aa</button><button style="font-family:'Comic Sans MS',cursive">Aa</button></div></div>
-</div></div></div></div></section>
+<section id="disclaimer" class="wrap center">
+  <div class="stage sm reveal" aria-hidden="true"><div class="tilt"><div class="r3d"></div></div></div>
+  <div class="head reveal"><h2>Disclaimer</h2></div>
+  <div class="legal reveal">
+    <p>rpbrc is an independent project and is not affiliated with, endorsed or supported by Roblox Corporation. Roblox is a trademark of Roblox Corporation.</p>
+    <p>Changing engine settings and using automation tools may break a game's or Roblox's rules. You use rpbrc at your own risk and are responsible for any action taken on your account.</p>
+    <p>Figures on this site are examples, not benchmarks. Results depend on your hardware, display and the game. rpbrc is provided as is, and Roblox updates can stop settings from working at any time.</p>
+  </div>
+</section>
+</main>
 
-<section class="section wrap"><div class="lx-caps">
-<div class="reveal"><h4>performance</h4><div class="lx-cap"><strong>unlock</strong><p>frame rate up to your display’s limit, or uncapped.</p></div><div class="lx-cap"><strong>tune</strong><p>engine settings applied before launch, reverted in one click.</p></div><div class="lx-cap"><strong>lighten</strong><p>lower texture and lighting cost on older gpus.</p></div><div class="lx-cap"><strong>monitor</strong><p>fps, frame time, cpu / gpu load and ping.</p></div></div>
-<div class="reveal"><h4>everything else</h4><div class="lx-cap"><strong>click</strong><p>clicker, profiles and keybinds, with cps &amp; reaction practice.</p></div><div class="lx-cap"><strong>capture</strong><p>instant replay and screenshots, no obs needed.</p></div><div class="lx-cap"><strong>crosshair</strong><p>an overlay that works over fullscreen roblox.</p></div><div class="lx-cap"><strong>style</strong><p>themes, fonts and sounds for the client and the app.</p></div></div>
-</div></section>
+<footer><div class="wrap">
+  <a class="brand" href="#top"><img src="assets/r.png" alt="">rpbrc</a>
+  <div class="links"><a href="https://discord.gg/rpbrc">Discord</a><a href="mailto:rep@rpbrc.pro">rep@rpbrc.pro</a><a href="#disclaimer">Disclaimers</a><span>© rpbrc</span></div>
+  <p class="note">rpbrc is not affiliated with or endorsed by Roblox Corporation.</p>
+</div></footer>
 
-<section class="section wrap lx-dark lx-band" id="performance"><div class="lx-card lx-perf reveal"><div class="lx-perf-top"><div><p class="eyebrow">performance</p><h2>what unlocking changes.</h2></div>
-<div class="lx-seg" role="group" aria-label="example hardware"><span class="lx-pill"></span><button class="on" data-k="mid">mid-range pc</button><button data-k="low">low-end pc</button><button data-k="mac">macbook</button></div></div>
-<div class="lx-rows" id="lx-rows"></div><p class="lx-note">example figures to show the idea, not measured benchmarks. your results depend on your hardware, display and the game.</p></div></section>
+<script>
+const nav=document.getElementById('nav');
+addEventListener('scroll',()=>nav.classList.toggle('solid',scrollY>20),{passive:true});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{rootMargin:'0px 0px -8% 0px'});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+const still=matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+// floating 3D R logos: stacked layers, darker toward the back
+document.querySelectorAll('.r3d').forEach((r,idx)=>{const big=r.closest('.big'),n=big?48:28,depth=big?24:14;
+ for(let i=0;i<n;i++){const im=new Image();im.src='assets/r.png';im.alt='';
+  const z=depth/2-i*depth/(n-1),k=i===0||i===n-1?1:.28+.25*(1-i/n);
+  im.style.transform='translateZ('+z+'px)';im.style.filter=i===0?'drop-shadow(0 0 14px rgba(255,255,255,.35))':'brightness('+k+')';r.appendChild(im)}
+ r.style.animationDelay=(-idx*1.7)+'s'});
+if(!still)addEventListener('pointermove',e=>{document.querySelectorAll('.tilt').forEach(t=>{const b=t.getBoundingClientRect();
+  if(b.bottom<0||b.top>innerHeight)return;
+  const dx=(e.clientX-(b.left+b.width/2))/innerWidth,dy=(e.clientY-(b.top+b.height/2))/innerHeight;
+  t.style.transform='rotateX('+(-dy*25)+'deg) rotateZ('+(dx*8)+'deg)'})},{passive:true});
 
-<section class="edition-section section" id="editions"><div class="wrap">
-<div class="lx-lineup-head reveal"><p class="eyebrow">the lineup</p><h2>pick your <span class="lx-chrome">rpbrc.</span></h2><p>start free with the all-in-one for your mac or pc. when you want more, rpbrc client and rpbrc external take it further.</p>
-<div class="lx-filter" role="group" aria-label="filter products"><span class="lx-fpill"></span><button class="on" data-f="all">all</button><button data-f="free">free</button><button data-f="paid">paid</button></div></div>
-<div class="lx-products reveal lx-stagger">
-
-<article class="lx-card lx-prod lx-aio" data-kind="free"><div class="lx-vis"><div class="lx-mini shot"><img src="assets/app-home.jpg" width="1600" height="926" alt="the rpbrc all-in-one home screen: clicker at 20 cps, quick actions for game mode, capture and studio" loading="lazy" decoding="async"></div></div>
-<div class="lx-body"><div class="lx-prod-top"><span class="lx-badge free">FREE</span><div class="lx-os" role="tablist" aria-label="platform"><button role="tab" aria-selected="true" data-os="mac"><svg viewBox="0 0 24 24"><path d="M16.4 12.6c0-2.5 2-3.7 2.1-3.8-1.2-1.7-3-1.9-3.6-2-1.5-.2-3 .9-3.8.9-.8 0-2-.9-3.3-.9C6.1 6.9 4.5 7.9 3.6 9.5c-1.8 3.1-.5 7.8 1.3 10.3.9 1.2 1.9 2.6 3.2 2.6 1.3-.1 1.8-.8 3.3-.8 1.6 0 2 .8 3.4.8 1.4 0 2.3-1.3 3.1-2.5 1-1.4 1.4-2.8 1.4-2.9-.1 0-2.8-1-2.9-4.4zM13.9 5.1c.7-.9 1.2-2 1-3.1-1 0-2.2.7-2.9 1.5-.6.7-1.2 1.9-1 3 1.1.1 2.2-.6 2.9-1.4z"/></svg>mac</button><button role="tab" aria-selected="false" data-os="win"><svg viewBox="0 0 24 24"><path d="M3 5.5 10 4.5v7H3zM11 4.3 21 3v8.5H11zM3 12.5h7v7l-7-1zM11 12.5h10V21l-10-1.4z"/></svg>windows</button></div></div>
-<h3>rpbrc <em>all-in-one</em></h3><p class="lx-desc">one app for your whole roblox setup, native on mac and windows. unlock your frame rate, tune the engine and launch already optimized.</p>
-<ul><li>fps unlocker — up to uncapped</li><li>engine presets, one-click revert</li><li>clicker, profiles &amp; keybinds</li><li>instant replay capture</li><li>crosshair overlay</li><li>fonts, cursors &amp; icon colors</li></ul>
-<div class="lx-prod-foot"><span class="lx-price">$0<small>free forever</small></span><span class="lx-os-req" data-mac="macos 15+ · intel + apple silicon" data-win="windows 10 / 11">macos 15+ · intel + apple silicon</span><a class="button primary magnetic lx-os-dl" href="rpbrc-free.zip" download data-mac="rpbrc-free.zip" data-win="https://discord.gg/rpbrc">download for mac <span class="download-glyph" aria-hidden="true">↓</span></a></div></div></article>
-
-<article class="lx-card lx-prod paid lx-dark" data-kind="paid"><span class="lx-ring" aria-hidden="true"></span><div class="lx-vis"><div class="lx-orbit"><span class="r r3"></span><span class="r r2"></span><span class="r r1"></span><img src="assets/mark.png" alt=""><span class="tag t1">flag library</span><span class="tag t2">live monitoring</span><span class="tag t3">customization studio</span></div></div>
-<div class="lx-body"><div class="lx-prod-top"><span class="lx-badge">PAID</span><span class="lx-plat-tag"><svg viewBox="0 0 24 24"><path d="M3 5.5 10 4.5v7H3zM11 4.3 21 3v8.5H11zM3 12.5h7v7l-7-1zM11 12.5h10V21l-10-1.4z"/></svg><svg viewBox="0 0 24 24"><path d="M16.4 12.6c0-2.5 2-3.7 2.1-3.8-1.2-1.7-3-1.9-3.6-2-1.5-.2-3 .9-3.8.9-.8 0-2-.9-3.3-.9C6.1 6.9 4.5 7.9 3.6 9.5c-1.8 3.1-.5 7.8 1.3 10.3.9 1.2 1.9 2.6 3.2 2.6 1.3-.1 1.8-.8 3.3-.8 1.6 0 2 .8 3.4.8 1.4 0 2.3-1.3 3.1-2.5 1-1.4 1.4-2.8 1.4-2.9-.1 0-2.8-1-2.9-4.4zM13.9 5.1c.7-.9 1.2-2 1-3.1-1 0-2.2.7-2.9 1.5-.6.7-1.2 1.9-1 3 1.1.1 2.2-.6 2.9-1.4z"/></svg>windows + macos</span></div>
-<h3>rpbrc <em>client</em></h3><p class="lx-desc">the full rpbrc experience. everything in the all-in-ones, plus the deepest tuning and customization we make.</p>
-<ul><li>searchable flag library</li><li>live load &amp; ping monitoring</li><li>screenshots &amp; media library</li><li>clip trimming &amp; annotation</li><li>theme, layout &amp; logo studio</li><li>priority support</li></ul>
-<div class="lx-prod-foot"><span class="lx-price">ask<small>on discord</small></span><a class="button primary magnetic" href="https://discord.gg/rpbrc" target="_blank" rel="noopener noreferrer">get client</a></div></div></article>
-
-<article class="lx-card lx-prod paid lx-dark" data-kind="paid"><span class="lx-ring" aria-hidden="true"></span><div class="lx-vis"><div class="lx-scene"><div class="sky"></div><div class="ground"></div><div class="blk" style="left:8%;width:46px;height:70px"></div><div class="blk" style="left:20%;width:30px;height:40px"></div><div class="blk" style="left:70%;width:60px;height:90px"></div><div class="blk" style="left:84%;width:34px;height:52px"></div><div class="blk" style="left:56%;width:24px;height:30px"></div>
-<div class="lx-hud">fps<b data-live="fps">240</b><span>ping<b data-live="ping">34</b></span></div><div class="lx-hud r">frame<b data-live="ms">4.2</b><span>cpu<b data-live="cpu">31%</b></span></div><div class="lx-xhair"></div><span class="lbl">EXTERNAL OVERLAY</span></div></div>
-<div class="lx-body"><div class="lx-prod-top"><span class="lx-badge">PAID</span><span class="lx-plat-tag"><svg viewBox="0 0 24 24"><path d="M3 5.5 10 4.5v7H3zM11 4.3 21 3v8.5H11zM3 12.5h7v7l-7-1zM11 12.5h10V21l-10-1.4z"/></svg><svg viewBox="0 0 24 24"><path d="M16.4 12.6c0-2.5 2-3.7 2.1-3.8-1.2-1.7-3-1.9-3.6-2-1.5-.2-3 .9-3.8.9-.8 0-2-.9-3.3-.9C6.1 6.9 4.5 7.9 3.6 9.5c-1.8 3.1-.5 7.8 1.3 10.3.9 1.2 1.9 2.6 3.2 2.6 1.3-.1 1.8-.8 3.3-.8 1.6 0 2 .8 3.4.8 1.4 0 2.3-1.3 3.1-2.5 1-1.4 1.4-2.8 1.4-2.9-.1 0-2.8-1-2.9-4.4zM13.9 5.1c.7-.9 1.2-2 1-3.1-1 0-2.2.7-2.9 1.5-.6.7-1.2 1.9-1 3 1.1.1 2.2-.6 2.9-1.4z"/></svg>windows + macos</span></div>
-<h3>rpbrc <em>external</em></h3><p class="lx-desc">runs alongside roblox in its own window. overlays, stats and controls on top of your game, without leaving it.</p>
-<ul><li>crosshair over fullscreen</li><li>fps, frame time &amp; ping hud</li><li>hotkey controls</li><li>per-game profiles</li><li>lightweight &amp; always on top</li><li>priority support</li></ul>
-<div class="lx-prod-foot"><span class="lx-price">ask<small>on discord</small></span><a class="button primary magnetic" href="https://discord.gg/rpbrc" target="_blank" rel="noopener noreferrer">get external</a></div></div></article>
-</div>
-<details class="comparison reveal lx-compare-wrap" open><summary>compare products <span class="plus" aria-hidden="true"></span></summary><div class="lx-compare lx-scroll"><table><thead><tr><th scope="col" style="text-align:left">feature</th><th scope="col">mac all-in-one<small>free</small></th><th scope="col">windows all-in-one<small>free</small></th><th scope="col">client<small>paid</small></th><th scope="col">external<small>paid</small></th></tr></thead><tbody><tr><th scope="row">fps unlocker &amp; engine presets</th><td><span class="lx-y" aria-label="included"></span></td><td><span class="lx-y" aria-label="included"></span></td><td><span class="lx-y" aria-label="included"></span></td><td><span class="lx-n2" aria-label="not included"></span></td></tr><tr><th scope="row">instant replay capture</th><td><span class="lx-y" aria-label="included"></span></td><td><span class="lx-y" aria-label="included"></span></td><td><span class="lx-y" aria-label="included"></span></td><td><span class="lx-n2" aria-label="not included"></span></td></tr><tr><th scope="row">crosshair overlay</th><td><span class="lx-y" aria-label="included"></span></td><td><span class="lx-y" aria-label="included"></span></td><td><span class="lx-y" aria-label="included"></span></td><td><span class="lx-y" aria-label="included"></span></td></tr><tr><th scope="row">clicker &amp; practice</th><td><span class="lx-y" aria-label="included"></span></td><td><span class="lx-y" aria-label="included"></span></td><td><span class="lx-y" aria-label="included"></span></td><td><span class="lx-n2" aria-label="not included"></span></td></tr><tr><th scope="row">searchable flag library</th><td><span class="lx-n2" aria-label="not included"></span></td><td><span class="lx-n2" aria-label="not included"></span></td><td><span class="lx-y" aria-label="included"></span></td><td><span class="lx-n2" aria-label="not included"></span></td></tr><tr><th scope="row">live fps, load &amp; ping</th><td><span class="lx-n2" aria-label="not included"></span></td><td><span class="lx-n2" aria-label="not included"></span></td><td><span class="lx-y" aria-label="included"></span></td><td><span class="lx-y" aria-label="included"></span></td></tr><tr><th scope="row">media library &amp; editing</th><td><span class="lx-n2" aria-label="not included"></span></td><td><span class="lx-n2" aria-label="not included"></span></td><td><span class="lx-y" aria-label="included"></span></td><td><span class="lx-n2" aria-label="not included"></span></td></tr><tr><th scope="row">customization studio</th><td><span class="lx-n2" aria-label="not included"></span></td><td><span class="lx-n2" aria-label="not included"></span></td><td><span class="lx-y" aria-label="included"></span></td><td><span class="lx-n2" aria-label="not included"></span></td></tr><tr><th scope="row">runs outside the game window</th><td><span class="lx-n2" aria-label="not included"></span></td><td><span class="lx-n2" aria-label="not included"></span></td><td><span class="lx-n2" aria-label="not included"></span></td><td><span class="lx-y" aria-label="included"></span></td></tr><tr><th scope="row">priority support</th><td><span class="lx-n2" aria-label="not included"></span></td><td><span class="lx-n2" aria-label="not included"></span></td><td><span class="lx-y" aria-label="included"></span></td><td><span class="lx-y" aria-label="included"></span></td></tr></tbody></table></div></details></div></section>
-<section class="section questions wrap" id="questions"><div class="reveal"><p class="eyebrow">before your first session</p><h2>a few good<br>things to know.</h2><a class="subtle-link" href="https://discord.gg/rpbrc" target="_blank" rel="noopener noreferrer">have another question? join us on discord.</a></div><div class="faq reveal"><details><summary>what is rpbrc?<span class="plus" aria-hidden="true"></span></summary><p>a performance client for roblox on windows and macos. it unlocks your frame rate and brings engine settings, clicking, practice, replay capture and customization into one app.</p></details><details><summary>how do i get started?<span class="plus" aria-hidden="true"></span></summary><p>download the free zip, unzip it, move rpbrc to your applications folder, and open the app. the app guides you through the permissions needed for the tools you use.</p><button class="text-button" data-install>view installation steps</button></details><details><summary>which permissions does it need?<span class="plus" aria-hidden="true"></span></summary><p>accessibility access lets the app read your keybinds and use clicking tools. screen recording access is used for capture. you can explore the other settings before enabling those tools.</p></details><details><summary>will every engine setting work?<span class="plus" aria-hidden="true"></span></summary><p>support depends on the roblox client. some overrides may be ignored as roblox changes. results also depend on your mac and your setup.</p></details><details><summary>is there a windows version?<span class="plus" aria-hidden="true"></span></summary><p>yes. rpbrc has a windows client for windows 10 and 11 alongside the macos app. grab it from discord.</p></details><details><summary>how do i get client or external?<span class="plus" aria-hidden="true"></span></summary><p>rpbrc client and rpbrc external are paid. join discord to ask about pricing and availability.</p></details></div></section>
-<section class="contact-section wrap reveal" id="contact"><img src="assets/mark.png" width="72" height="72" alt=""><p class="eyebrow">a good setup starts here</p><h2>ready for your<br>next session?</h2><p>get the app. meet the community. make it yours.</p><div class="contact-actions"><a class="button primary magnetic" href="rpbrc-free.zip" download>download free <span class="download-glyph" aria-hidden="true">↓</span></a><a class="button secondary" href="https://discord.gg/rpbrc" target="_blank" rel="noopener noreferrer">join discord</a></div><div class="contact-addresses"><a href="https://discord.gg/rpbrc" target="_blank" rel="noopener noreferrer">discord.gg/rpbrc</a><span aria-hidden="true">/</span><a href="mailto:rep@rpbrc.pro">rep@rpbrc.pro</a></div></section>
-</main><footer class="wrap lx-foot"><a class="brand" href="#">rpbrc</a><span>less between you and the game</span><div><button id="motion-toggle" class="text-button" aria-pressed="true">motion on</button><span>© rpbrc</span></div></footer>
-<dialog id="install-dialog" aria-labelledby="install-title"><div class="dialog-head"><span class="eyebrow">welcome to rpbrc</span><button id="close-install" class="icon-button" aria-label="close installation guide">×</button></div><h2 id="install-title">a few steps.<br>then you’re in.</h2><ol class="install-steps"><li><span>01</span><div><strong>download & unzip</strong><p>save rpbrc-free.zip, then double-click the zip to unpack it.</p></div></li><li><span>02</span><div><strong>move to applications</strong><p>drag rpbrc.app from the extracted folder into your applications folder.</p></div></li><li><span>03</span><div><strong>open & make it yours</strong><p>open rpbrc. follow its permission prompts when you use clicking or capture tools.</p></div></li></ol><a class="button primary" href="rpbrc-free.zip" download>download free <span class="download-glyph" aria-hidden="true">↓</span></a><p class="dialog-help">need a hand? <a href="https://discord.gg/rpbrc" target="_blank" rel="noopener noreferrer">ask in discord</a>.</p></dialog>
-</div>
-<div class="lx-giant" aria-hidden="true">rpbrc</div>
+</script>
 </body></html>
-
-
-
-
